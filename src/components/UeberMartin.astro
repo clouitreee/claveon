@@ -2,71 +2,42 @@
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 ---
-<section class="section" id="ueber-martin" data-reveal>
+<section class="section" id="ueber-uns" data-reveal style="background:var(--terra-light);">
   <div class="container">
-    <div class="grid md:grid-cols-12 gap-10 items-start">
-
-      <div class="md:col-span-3">
-        <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--muted);">
-          {lang === 'de' ? '03 · Über mich' : '03 · About me'}
-        </span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+      <div style="max-width:380px;">
+        <img src="/assets/martin.jpg" alt="ClaveON Team" loading="lazy"
+          style="width:100%;border-radius:6px;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;" />
       </div>
-
-      <div class="md:col-span-9">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-
-          <!-- Photo -->
-          <div>
-            <img
-              src="/assets/martin.jpg"
-              alt="Martin — ClaveON"
-              class="rounded-2xl w-full max-w-xs"
-              style="aspect-ratio: 4/5; object-fit: cover; object-position: top;"
-              loading="lazy"
-            />
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:1rem;">
+          {lang === 'de' ? '— Über uns' : '— About us'}
+        </p>
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:1.5rem;">
+          {lang === 'de' ? 'Kein Callcenter. Kein Konzern.' : 'No call center. No corporation.'}
+        </h2>
+        {lang === 'de' ? (
+          <div style="display:grid;gap:1rem;color:var(--muted);font-size:1rem;line-height:1.7;">
+            <p style="margin:0;">Wir sind ein kleines Team aus Köln — mit Leidenschaft für Technik und dem echten Wunsch, dass Ihre Geräte funktionieren.</p>
+            <p style="margin:0;">Wir kommen persönlich zu Ihnen, erklären was wir tun, und gehen erst wenn das Problem gelöst ist.</p>
+            <p style="margin:0;font-weight:600;color:var(--text);">Deutsch · Español · English</p>
           </div>
-
-          <!-- Text -->
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-5">Martin.</h2>
-            {lang === 'de' ? (
-              <div class="space-y-4 text-base leading-relaxed" style="color: var(--muted);">
-                <p>
-                  Geboren in Kuba, seit 2019 in Köln zuhause.
-                  Technik fasziniert mich — aber was mir wirklich Spaß macht
-                  ist, wenn am Ende alles läuft und Sie entspannt sind.
-                </p>
-                <p>
-                  Kein Callcenter, kein Konzern.
-                  Ich komme persönlich zu Ihnen, erkläre was ich tue,
-                  und gehe erst wenn das Problem gelöst ist.
-                </p>
-                <p class="font-medium" style="color: var(--text);">
-                  Deutsch · Español · English
-                </p>
-              </div>
-            ) : (
-              <div class="space-y-4 text-base leading-relaxed" style="color: var(--muted);">
-                <p>
-                  Born in Cuba, living in Cologne since 2019.
-                  I love technology — but what I really enjoy is seeing you
-                  relaxed when everything finally works.
-                </p>
-                <p>
-                  No call center, no corporation.
-                  I show up personally, explain what I do,
-                  and don't leave until the problem is solved.
-                </p>
-                <p class="font-medium" style="color: var(--text);">
-                  Deutsch · Español · English
-                </p>
-              </div>
-            )}
+        ) : (
+          <div style="display:grid;gap:1rem;color:var(--muted);font-size:1rem;line-height:1.7;">
+            <p style="margin:0;">We are a small team from Cologne — passionate about technology and genuinely wanting your devices to work.</p>
+            <p style="margin:0;">We come to you personally, explain what we do, and don't leave until the problem is solved.</p>
+            <p style="margin:0;font-weight:600;color:var(--text);">Deutsch · Español · English</p>
           </div>
-
-        </div>
+        )}
       </div>
     </div>
   </div>
 </section>
 <div class="divider"></div>
+
+<style>
+@media (max-width: 640px) {
+  #ueber-uns .container > div { grid-template-columns: 1fr !important; }
+  #ueber-uns img { max-width: 260px !important; }
+}
+</style>

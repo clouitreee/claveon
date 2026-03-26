@@ -2,34 +2,21 @@
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 ---
-<footer class="section-sm" style="background: #F8FAFC; border-top: 1px solid var(--border);">
+<footer style="padding:2rem 0;border-top:1px solid var(--border);background:var(--text);">
   <div class="container">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-
-      <div class="flex items-center gap-6">
-        <a href={lang === 'de' ? '/impressum' : '/en/impressum'}
-          class="text-sm hover:underline" style="color: var(--muted); text-decoration: none;">
-          Impressum
-        </a>
-        <a href={lang === 'de' ? '/datenschutz' : '/en/datenschutz'}
-          class="text-sm hover:underline" style="color: var(--muted); text-decoration: none;">
-          Datenschutz
-        </a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;">
+      <div style="display:flex;align-items:center;gap:1.5rem;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1rem;color:#fff;letter-spacing:-0.03em;">Clave<span style="color:var(--terra);">ON</span></span>
+        <a href={lang === 'de' ? '/impressum/' : '/en/impressum/'} style="font-size:0.8rem;color:#9CA3AF;text-decoration:none;">Impressum</a>
+        <a href={lang === 'de' ? '/datenschutz/' : '/en/datenschutz/'} style="font-size:0.8rem;color:#9CA3AF;text-decoration:none;">Datenschutz</a>
       </div>
-
-      <div class="flex items-center gap-4">
-        <span class="text-xs font-mono" style="color: var(--muted);">
-          {lang === 'de' ? 'IT für Unternehmen:' : 'IT for businesses:'}
-        </span>
-        <a href="https://werixo.de" target="_blank" rel="noopener"
-          class="text-xs font-semibold" style="color: var(--blue); text-decoration: none;">
-          werixo.de →
-        </a>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:0.8rem;color:#6B7280;">{lang === 'de' ? 'IT für Unternehmen:' : 'IT for businesses:'}</span>
+        <a href="https://werixo.de" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--terra);text-decoration:none;font-weight:600;">werixo.de ↗</a>
       </div>
-
     </div>
-    <p class="text-xs mt-4" style="color: #CBD5E1;">
-      {lang === 'de' ? 'Keine Tracking-Cookies. Keine Datenweitergabe.' : 'No tracking cookies. No data sharing.'}
+    <p style="font-size:0.75rem;color:#4B5563;margin-top:1rem;margin-bottom:0;font-family:'IBM Plex Mono',monospace;">
+      {lang === 'de' ? 'Keine Tracking-Cookies · Keine Datenweitergabe · Köln' : 'No tracking cookies · No data sharing · Cologne'}
     </p>
   </div>
 </footer>

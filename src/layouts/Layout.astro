@@ -1,13 +1,6 @@
 ---
 import '../styles/global.css';
-
-interface Props {
-  title: string;
-  description: string;
-  lang?: string;
-  canonicalPath?: string;
-}
-
+interface Props { title: string; description: string; lang?: string; canonicalPath?: string; }
 const { title, description, lang = 'de', canonicalPath = '/' } = Astro.props;
 const canonical = `https://claveon.de${canonicalPath}`;
 ---
@@ -19,16 +12,17 @@ const canonical = `https://claveon.de${canonicalPath}`;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="ClaveON" />
     <meta name="twitter:card" content="summary" />
-    <meta name="theme-color" content="#2563EB" />
+    <meta name="theme-color" content="#C1440E" />
     <link rel="icon" href="/favicon.ico" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     {lang === 'de' && <link rel="alternate" hreflang="en" href="https://claveon.de/en/" />}
     {lang === 'en' && <link rel="alternate" hreflang="de" href="https://claveon.de/" />}
     <link rel="alternate" hreflang="x-default" href="https://claveon.de/" />
@@ -36,12 +30,15 @@ const canonical = `https://claveon.de${canonicalPath}`;
   <body>
     <slot />
     <script>
-      // Scroll reveal
-      const observer = new IntersectionObserver(
-        (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-        { threshold: 0.1 }
-      );
-      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver(
+          (entries) => entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+          }),
+          { threshold: 0.08 }
+        );
+        document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+      });
     </script>
   </body>
 </html>

@@ -3,50 +3,28 @@ import Layout from '../layouts/Layout.astro';
 import NavBar from '../components/NavBar.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
-import Windows10 from '../components/Windows10.astro';
 import Services from '../components/Services.astro';
 import Pakete from '../components/Pakete.astro';
 import UeberMartin from '../components/UeberMartin.astro';
 import Kontakt from '../components/Kontakt.astro';
 import Footer from '../components/Footer.astro';
-
 const lang = 'de';
 ---
 <Layout
   title="Technikhilfe Köln – PC, WLAN & Smartphone | ClaveON ab €25"
-  description="Vor-Ort Technikhilfe in Köln: PC, WLAN, Smartphone, Drucker, TV. Fernwartung ab €25 · Vor Ort ab €49. Kein Minutentakt. Kein MediaMarkt-Preis."
-  lang={lang}
-  canonicalPath="/"
->
+  description="Vor-Ort Technikhilfe in Köln: PC, WLAN, Smartphone, Drucker, TV. Fernwartung ab €25 · Vor Ort ab €49. Kein Konzernpreis. Kein Minutentakt."
+  lang={lang} canonicalPath="/">
   <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://claveon.de/#business",
-    "name": "ClaveON Technikhilfe Köln",
-    "url": "https://claveon.de/",
-    "email": "info@claveon.de",
-    "priceRange": "€25–€89",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Liebigstraße 7",
-      "addressLocality": "Köln",
-      "postalCode": "50823",
-      "addressCountry": "DE"
-    },
-    "areaServed": ["Köln","Hürth","Frechen","Pulheim","Leverkusen","Bergisch Gladbach","Dormagen"],
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-      "opens": "09:00",
-      "closes": "20:00"
-    }
+    "@context":"https://schema.org","@type":"LocalBusiness","@id":"https://claveon.de/#business",
+    "name":"ClaveON Technikhilfe Köln","url":"https://claveon.de/","email":"info@claveon.de",
+    "priceRange":"€25–€89","address":{"@type":"PostalAddress","addressLocality":"Köln","postalCode":"50823","addressCountry":"DE"},
+    "areaServed":["Köln","Hürth","Frechen","Pulheim","Leverkusen","Bergisch Gladbach","Dormagen"],
+    "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"09:00","closes":"20:00"}
   })} />
-
   <NavBar lang={lang} />
   <main>
     <Hero lang={lang} />
     <TrustBar lang={lang} />
-    <Windows10 lang={lang} />
     <Services lang={lang} />
     <Pakete lang={lang} />
     <UeberMartin lang={lang} />

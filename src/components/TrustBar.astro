@@ -2,19 +2,17 @@
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 const items = lang === 'de'
-  ? ['Kein Minutentakt', 'Kein MediaMarkt-Preis', 'Köln & 15 km Umgebung', 'Nur per E-Mail — schnelle Antwort']
-  : ['No per-minute billing', 'No MediaMarkt price', 'Cologne & 15 km area', 'Email only — fast reply'];
+  ? ['Kein Konzernpreis', 'Kein Minutentakt', 'Köln & 15 km Umgebung', 'Antwort in 24h']
+  : ['No corporate pricing', 'No per-minute billing', 'Cologne & 15 km area', 'Reply within 24h'];
 ---
-<section class="section-sm">
+<section style="padding:1.25rem 0;background:var(--bg-soft);border-bottom:1px solid var(--border);">
   <div class="container">
-    <div class="flex flex-wrap gap-x-8 gap-y-3 justify-center md:justify-start">
+    <div style="display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;align-items:center;">
       {items.map(item => (
-        <div class="flex items-center gap-2 text-sm font-medium" style="color: var(--muted);">
-          <span style="color: var(--green);">✓</span>
-          {item}
-        </div>
+        <span style="font-size:0.875rem;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:0.5rem;">
+          <span style="color:var(--green);font-weight:700;">✓</span> {item}
+        </span>
       ))}
     </div>
   </div>
 </section>
-<div class="divider"></div>

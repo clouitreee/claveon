@@ -3,57 +3,49 @@ interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 const t = {
   de: {
-    label: '04 · Kontakt',
-    headline: 'Schreiben Sie mir.',
-    sub: 'Antwort innerhalb von 24 Stunden. Direkt von Martin.',
-    typeLabel: 'Ich kontaktiere für:',
+    headline: 'Schreiben Sie uns.',
+    sub: 'Antwort innerhalb von 24 Stunden.',
     typePrivat: 'Privat',
-    typeUnternehmen: 'Unternehmen (ab 5 Mitarbeiter)',
-    werixoText: 'Für IT-Infrastruktur von Unternehmen empfehle ich meinen Partner WERIXO — professioneller Managed Service mit Monitoring, Backups und vierteljährlichem Evidence Pack.',
-    werixoCta: 'werixo.de besuchen →',
-    nameLabel: 'Name',
-    emailLabel: 'E-Mail',
+    typeUnternehmen: 'Unternehmen',
+    werixoText: 'Für IT-Infrastruktur von Unternehmen empfehlen wir WERIXO — professioneller Managed Service mit Monitoring, Backups und vierteljährlichem Evidence Pack.',
+    werixoCta: 'werixo.de besuchen ↗',
+    nameLabel: 'Ihr Name', emailLabel: 'E-Mail-Adresse',
+    phoneLabel: 'Telefon (optional)', phonePlaceholder: '+49 ...',
     paketLabel: 'Paket (optional)',
     paketOptions: [
       { value: '', label: '— kein bestimmtes —' },
-      { value: 'fernwartung', label: 'Fernwartung · €25 / 30 Min' },
-      { value: 'schnell', label: 'Schnell-Hilfe · €49 vor Ort' },
-      { value: 'neustart', label: 'Neustart-Paket · €79 vor Ort' },
-      { value: 'migration', label: 'Windows 10 Migration · €89 vor Ort' },
+      { value: 'remote', label: 'Fernwartung · €25 / 30 Min' },
+      { value: 'onsite', label: 'Vor-Ort Hilfe · €49' },
+      { value: 'neustart', label: 'Neustart-Paket · €79' },
+      { value: 'migration', label: 'Windows 10 → 11 · €89' },
       { value: 'other', label: 'Sonstiges · €59/h' },
     ],
-    msgLabel: 'Nachricht',
-    msgPlaceholder: 'Was funktioniert nicht? Kurze Beschreibung reicht.',
-    submit: 'Nachricht senden',
-    sending: 'Wird gesendet…',
-    success: '✓ Nachricht gesendet. Ich melde mich bald.',
+    msgLabel: 'Ihre Nachricht', msgPlaceholder: 'Was funktioniert nicht? Eine kurze Beschreibung reicht.',
+    submit: 'Nachricht senden', sending: 'Wird gesendet…',
+    success: '✓ Nachricht gesendet. Wir melden uns bald.',
     error: 'Fehler beim Senden. Bitte direkt an info@claveon.de schreiben.',
   },
   en: {
-    label: '04 · Contact',
-    headline: 'Write to me.',
-    sub: 'Reply within 24 hours. Directly from Martin.',
-    typeLabel: 'I am contacting for:',
+    headline: 'Write to us.',
+    sub: 'Reply within 24 hours.',
     typePrivat: 'Personal',
-    typeUnternehmen: 'Business (5+ employees)',
-    werixoText: 'For business IT infrastructure, I recommend my partner WERIXO — professional Managed Service with monitoring, backups and quarterly Evidence Pack.',
-    werixoCta: 'Visit werixo.de →',
-    nameLabel: 'Name',
-    emailLabel: 'Email',
+    typeUnternehmen: 'Business',
+    werixoText: 'For business IT infrastructure we recommend WERIXO — professional Managed Service with monitoring, backups and quarterly Evidence Pack.',
+    werixoCta: 'Visit werixo.de ↗',
+    nameLabel: 'Your name', emailLabel: 'Email address',
+    phoneLabel: 'Phone (optional)', phonePlaceholder: '+49 ...',
     paketLabel: 'Package (optional)',
     paketOptions: [
       { value: '', label: '— no specific package —' },
-      { value: 'fernwartung', label: 'Remote Support · €25 / 30 min' },
-      { value: 'schnell', label: 'Quick Help · €49 on-site' },
-      { value: 'neustart', label: 'Fresh Start · €79 on-site' },
-      { value: 'migration', label: 'Windows 10 Migration · €89 on-site' },
+      { value: 'remote', label: 'Remote Support · €25 / 30 min' },
+      { value: 'onsite', label: 'On-site Help · €49' },
+      { value: 'neustart', label: 'Fresh Start · €79' },
+      { value: 'migration', label: 'Windows 10 → 11 · €89' },
       { value: 'other', label: 'Other · €59/h' },
     ],
-    msgLabel: 'Message',
-    msgPlaceholder: "What's not working? A short description is enough.",
-    submit: 'Send message',
-    sending: 'Sending…',
-    success: '✓ Message sent. I\'ll get back to you soon.',
+    msgLabel: 'Your message', msgPlaceholder: "What's not working? A short description is enough.",
+    submit: 'Send message', sending: 'Sending…',
+    success: "✓ Message sent. We'll get back to you soon.",
     error: 'Error sending. Please write directly to info@claveon.de.',
   }
 };
@@ -61,172 +53,92 @@ const c = t[lang as keyof typeof t] ?? t.de;
 ---
 <section class="section" id="kontakt" data-reveal>
   <div class="container">
-    <div class="grid md:grid-cols-12 gap-10 items-start">
-
-      <div class="md:col-span-3">
-        <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--muted);">{c.label}</span>
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;">
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:1rem;">
+          {lang === 'de' ? '— Kontakt' : '— Contact'}
+        </p>
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:1rem;">{c.headline}</h2>
+        <p style="color:var(--muted);font-size:1rem;margin-bottom:2rem;">{c.sub}</p>
+        <a href="mailto:info@claveon.de" style="font-family:'IBM Plex Mono',monospace;font-size:0.9rem;color:var(--terra);text-decoration:none;display:flex;align-items:center;gap:0.5rem;">✉ info@claveon.de</a>
       </div>
-
-      <div class="md:col-span-7">
-        <h2 class="text-3xl md:text-4xl font-bold mb-2">{c.headline}</h2>
-        <p class="text-base mb-8" style="color: var(--muted);">{c.sub}</p>
-
-        <!-- Privat / Unternehmen selector -->
-        <div class="flex gap-3 mb-8">
-          <button
-            id="btn-privat"
-            class="type-btn px-4 py-2 rounded-lg border text-sm font-medium transition-all active"
-            style="border-color: #2563EB; background: #EFF6FF; color: #1D4ED8;"
-          >
-            {c.typePrivat}
-          </button>
-          <button
-            id="btn-unternehmen"
-            class="type-btn px-4 py-2 rounded-lg border text-sm font-medium transition-all"
-            style="border-color: var(--border); color: var(--muted);"
-          >
-            {c.typeUnternehmen}
-          </button>
+      <div>
+        <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;">
+          <button id="btn-privat" class="btn-primary" style="font-size:0.85rem;padding:0.6rem 1.25rem;">{c.typePrivat}</button>
+          <button id="btn-unternehmen" class="btn-ghost" style="font-size:0.85rem;padding:0.6rem 1.25rem;">{c.typeUnternehmen}</button>
         </div>
-
-        <!-- WERIXO bridge (hidden by default) -->
-        <div id="werixo-block" class="hidden rounded-xl p-6 mb-6" style="background: #F8FAFC; border: 1.5px solid var(--border);">
-          <p class="text-base leading-relaxed mb-4" style="color: var(--muted);">{c.werixoText}</p>
+        <div id="werixo-block" style="display:none;padding:1.5rem;background:var(--bg-soft);border:2px solid var(--border);border-radius:6px;margin-bottom:1rem;">
+          <p style="color:var(--muted);font-size:0.95rem;margin-bottom:1.25rem;">{c.werixoText}</p>
           <a href="https://werixo.de" target="_blank" rel="noopener" class="btn-primary">{c.werixoCta}</a>
         </div>
-
-        <!-- Contact form -->
-        <form id="contact-form" class="space-y-5">
+        <form id="contact-form" style="display:grid;gap:1rem;">
           <div>
-            <label class="block text-sm font-medium mb-1.5">{c.nameLabel} *</label>
-            <input
-              name="name"
-              required
-              type="text"
-              class="w-full px-4 py-3 rounded-lg border text-base outline-none transition focus:border-blue-500"
-              style="border-color: var(--border);"
-              placeholder="Martin Müller"
-            />
+            <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.nameLabel} *</label>
+            <input name="name" required type="text" class="field" placeholder="Anna Müller" />
           </div>
-
-          <div>
-            <label class="block text-sm font-medium mb-1.5">{c.emailLabel} *</label>
-            <input
-              name="email"
-              required
-              type="email"
-              class="w-full px-4 py-3 rounded-lg border text-base outline-none transition focus:border-blue-500"
-              style="border-color: var(--border);"
-              placeholder="ihre@email.de"
-            />
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div>
+              <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.emailLabel} *</label>
+              <input name="email" required type="email" class="field" placeholder="ihre@email.de" />
+            </div>
+            <div>
+              <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.phoneLabel}</label>
+              <input name="phone" type="tel" class="field" placeholder={c.phonePlaceholder} />
+            </div>
           </div>
-
           <div>
-            <label class="block text-sm font-medium mb-1.5">{c.paketLabel}</label>
-            <select
-              name="paket"
-              class="w-full px-4 py-3 rounded-lg border text-base outline-none transition focus:border-blue-500 bg-white"
-              style="border-color: var(--border);"
-            >
-              {c.paketOptions.map(opt => (
-                <option value={opt.value}>{opt.label}</option>
-              ))}
+            <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.paketLabel}</label>
+            <select name="paket" class="field" style="background:var(--bg);cursor:pointer;">
+              {c.paketOptions.map(opt => <option value={opt.value}>{opt.label}</option>)}
             </select>
           </div>
-
           <div>
-            <label class="block text-sm font-medium mb-1.5">{c.msgLabel} *</label>
-            <textarea
-              name="message"
-              required
-              rows={4}
-              class="w-full px-4 py-3 rounded-lg border text-base outline-none transition focus:border-blue-500 resize-none"
-              style="border-color: var(--border);"
-              placeholder={c.msgPlaceholder}
-            ></textarea>
+            <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.msgLabel} *</label>
+            <textarea name="message" required rows={4} class="field" style="resize:none;" placeholder={c.msgPlaceholder}></textarea>
           </div>
-
-          <div id="form-status" class="hidden text-sm font-medium"></div>
-
-          <button
-            type="submit"
-            id="submit-btn"
-            class="btn-primary w-full justify-center"
-            data-submit={c.submit}
-            data-sending={c.sending}
-          >
-            {c.submit}
-          </button>
+          <div id="form-status" style="display:none;font-size:0.9rem;font-weight:500;"></div>
+          <button type="submit" id="submit-btn" class="btn-primary" data-submit={c.submit} data-sending={c.sending}>{c.submit}</button>
         </form>
-
       </div>
     </div>
   </div>
 </section>
 
+<style>
+@media (max-width: 640px) {
+  #kontakt .container > div { grid-template-columns: 1fr !important; }
+  #contact-form > div:nth-child(2) { grid-template-columns: 1fr !important; }
+}
+</style>
+
 <script define:vars={{ successMsg: c.success, errorMsg: c.error }}>
-  // Type selector
   const btnPrivat = document.getElementById('btn-privat');
   const btnUnternehmen = document.getElementById('btn-unternehmen');
   const werixoBlock = document.getElementById('werixo-block');
   const contactForm = document.getElementById('contact-form');
-
-  function setType(type) {
-    if (type === 'unternehmen') {
-      werixoBlock.classList.remove('hidden');
-      contactForm.classList.add('hidden');
-      btnUnternehmen.style.borderColor = '#2563EB';
-      btnUnternehmen.style.background = '#EFF6FF';
-      btnUnternehmen.style.color = '#1D4ED8';
-      btnPrivat.style.borderColor = 'var(--border)';
-      btnPrivat.style.background = '';
-      btnPrivat.style.color = 'var(--muted)';
+  const setActive = (active) => {
+    if (active === 'unternehmen') {
+      werixoBlock.style.display = 'block'; contactForm.style.display = 'none';
+      btnUnternehmen.className = 'btn-primary'; btnPrivat.className = 'btn-ghost';
     } else {
-      werixoBlock.classList.add('hidden');
-      contactForm.classList.remove('hidden');
-      btnPrivat.style.borderColor = '#2563EB';
-      btnPrivat.style.background = '#EFF6FF';
-      btnPrivat.style.color = '#1D4ED8';
-      btnUnternehmen.style.borderColor = 'var(--border)';
-      btnUnternehmen.style.background = '';
-      btnUnternehmen.style.color = 'var(--muted)';
+      werixoBlock.style.display = 'none'; contactForm.style.display = 'grid';
+      btnPrivat.className = 'btn-primary'; btnUnternehmen.className = 'btn-ghost';
     }
-  }
-
-  btnPrivat.addEventListener('click', () => setType('privat'));
-  btnUnternehmen.addEventListener('click', () => setType('unternehmen'));
-
-  // Form submit
+    [btnPrivat, btnUnternehmen].forEach(b => { b.style.fontSize='0.85rem'; b.style.padding='0.6rem 1.25rem'; });
+  };
+  btnPrivat.addEventListener('click', () => setActive('privat'));
+  btnUnternehmen.addEventListener('click', () => setActive('unternehmen'));
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
     const status = document.getElementById('form-status');
     const data = Object.fromEntries(new FormData(contactForm));
-
-    btn.disabled = true;
-    btn.textContent = btn.dataset.sending;
-    status.classList.add('hidden');
-
+    btn.disabled = true; btn.textContent = btn.dataset.sending; status.style.display = 'none';
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        status.textContent = successMsg;
-        status.style.color = 'var(--green)';
-        contactForm.reset();
-      } else {
-        throw new Error();
-      }
-    } catch {
-      status.textContent = errorMsg;
-      status.style.color = '#DC2626';
-    } finally {
-      status.classList.remove('hidden');
-      btn.disabled = false;
-      btn.textContent = btn.dataset.submit;
-    }
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      if (res.ok) { status.textContent = successMsg; status.style.color = 'var(--green)'; contactForm.reset(); }
+      else throw new Error();
+    } catch { status.textContent = errorMsg; status.style.color = '#DC2626'; }
+    finally { status.style.display = 'block'; btn.disabled = false; btn.textContent = btn.dataset.submit; }
   });
 </script>

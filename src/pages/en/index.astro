@@ -3,26 +3,21 @@ import Layout from '../../layouts/Layout.astro';
 import NavBar from '../../components/NavBar.astro';
 import Hero from '../../components/Hero.astro';
 import TrustBar from '../../components/TrustBar.astro';
-import Windows10 from '../../components/Windows10.astro';
 import Services from '../../components/Services.astro';
 import Pakete from '../../components/Pakete.astro';
 import UeberMartin from '../../components/UeberMartin.astro';
 import Kontakt from '../../components/Kontakt.astro';
 import Footer from '../../components/Footer.astro';
-
 const lang = 'en';
 ---
 <Layout
   title="Tech Help Cologne – PC, WiFi & Smartphone | ClaveON from €25"
-  description="On-site tech help in Cologne: PC, WiFi, smartphone, printer, TV. Remote from €25 · On-site from €49. No per-minute billing."
-  lang={lang}
-  canonicalPath="/en/"
->
+  description="On-site tech help in Cologne: PC, WiFi, smartphone, printer, TV. Remote from €25 · On-site from €49. No corporate pricing. No per-minute billing."
+  lang={lang} canonicalPath="/en/">
   <NavBar lang={lang} />
   <main>
     <Hero lang={lang} />
     <TrustBar lang={lang} />
-    <Windows10 lang={lang} />
     <Services lang={lang} />
     <Pakete lang={lang} />
     <UeberMartin lang={lang} />

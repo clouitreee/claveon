@@ -3,68 +3,58 @@ interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 const t = {
   de: {
-    label: '01 · Leistungen',
-    headline: 'Wenn es Strom hat, schaue ich es mir an.',
+    headline: 'Wenn es Strom hat, schauen wir es uns an.',
     sub: 'Markenunabhängig. Erklärt in einfachem Deutsch.',
     services: [
-      'PC & Laptop — langsam, Absturz, Viren, Neueinrichtung',
-      'iPhone & Android — Einrichtung, Fotos sichern, Apps',
-      'WLAN & Router — kein Internet, schwaches Signal, neuer Router',
-      'Smart TV & Streaming — Netflix, Prime, Sender, Mediathek',
-      'Drucker & Scanner — Installation, WLAN-Druck, Fehlermeldungen',
-      'Kaffeevollautomat — Jura, DeLonghi, Siemens EQ · App & Einrichtung',
-      'Saugroboter & Sprachassistenten — Roomba, Alexa, Google Home',
-      'Passwörter & E-Mail — vergessen, neues Konto, Sicherheit',
-      'Fotos & Backups — Übertragung, Cloud, externe Festplatte',
+      { icon: '💻', name: 'PC & Laptop', desc: 'Langsam, Absturz, Viren, Neueinrichtung' },
+      { icon: '📱', name: 'iPhone & Android', desc: 'Einrichtung, Fotos sichern, Apps, Updates' },
+      { icon: '📡', name: 'WLAN & Router', desc: 'Kein Internet, schwaches Signal, neuer Router' },
+      { icon: '📺', name: 'Smart TV & Streaming', desc: 'Netflix, Prime, ARD, Mediathek, Sender' },
+      { icon: '🖨️', name: 'Drucker & Scanner', desc: 'Installation, WLAN-Druck, Fehlermeldungen' },
+      { icon: '☕', name: 'Kaffeevollautomat', desc: 'Jura · DeLonghi · Siemens EQ — App & Einrichtung' },
+      { icon: '🤖', name: 'Saugroboter & Smart Home', desc: 'Roomba, Alexa, Google Home, Philips Hue' },
+      { icon: '🔑', name: 'Passwörter & E-Mail', desc: 'Vergessen, neues Konto, Sicherheit' },
+      { icon: '📷', name: 'Fotos & Backups', desc: 'Übertragung, Cloud, externe Festplatte' },
+      { icon: '🪟', name: 'Windows 10 → 11', desc: 'Upgrade-Beratung, Migration, Neugerät einrichten' },
     ],
-    last: 'Alles andere — wenn Sie unsicher sind, fragen Sie einfach.',
+    last: 'Alles andere — einfach fragen.',
   },
   en: {
-    label: '01 · Services',
-    headline: "If it needs power, I'll take a look.",
+    headline: "If it needs power, we'll take a look.",
     sub: 'Brand independent. Explained in plain language.',
     services: [
-      'PC & Laptop — slow, crashes, viruses, fresh setup',
-      'iPhone & Android — setup, photo backup, apps',
-      'WiFi & Router — no internet, weak signal, new router',
-      'Smart TV & Streaming — Netflix, Prime, channels, media',
-      'Printer & Scanner — installation, wireless printing, errors',
-      'Coffee machine — Jura, DeLonghi, Siemens EQ · app & setup',
-      'Robot vacuum & voice assistants — Roomba, Alexa, Google Home',
-      'Passwords & Email — forgotten, new account, security',
-      'Photos & Backups — transfer, cloud, external drive',
+      { icon: '💻', name: 'PC & Laptop', desc: 'Slow, crashes, viruses, fresh setup' },
+      { icon: '📱', name: 'iPhone & Android', desc: 'Setup, photo backup, apps, updates' },
+      { icon: '📡', name: 'WiFi & Router', desc: 'No internet, weak signal, new router' },
+      { icon: '📺', name: 'Smart TV & Streaming', desc: 'Netflix, Prime, channels, media library' },
+      { icon: '🖨️', name: 'Printer & Scanner', desc: 'Installation, wireless printing, errors' },
+      { icon: '☕', name: 'Coffee machine', desc: 'Jura · DeLonghi · Siemens EQ — app & setup' },
+      { icon: '🤖', name: 'Robot vacuum & Smart Home', desc: 'Roomba, Alexa, Google Home, Philips Hue' },
+      { icon: '🔑', name: 'Passwords & Email', desc: 'Forgotten, new account, security' },
+      { icon: '📷', name: 'Photos & Backups', desc: 'Transfer, cloud, external drive' },
+      { icon: '🪟', name: 'Windows 10 → 11', desc: 'Upgrade advice, migration, new device setup' },
     ],
-    last: 'Anything else — if you\'re unsure, just ask.',
+    last: "Anything else — just ask.",
   }
 };
 const c = t[lang as keyof typeof t] ?? t.de;
 ---
 <section class="section" id="leistungen" data-reveal>
   <div class="container">
-    <div class="grid md:grid-cols-12 gap-10 items-start">
-
-      <div class="md:col-span-3">
-        <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--muted);">{c.label}</span>
-      </div>
-
-      <div class="md:col-span-9">
-        <h2 class="text-3xl md:text-4xl font-bold mb-3">{c.headline}</h2>
-        <p class="text-base mb-8" style="color: var(--muted);">{c.sub}</p>
-
-        <div class="space-y-3">
-          {c.services.map(s => (
-            <div class="flex items-start gap-3 py-3 border-b" style="border-color: var(--border);">
-              <span class="mt-1 flex-shrink-0 font-mono text-sm" style="color: var(--blue);">→</span>
-              <span class="text-base">{s}</span>
-            </div>
-          ))}
-          <div class="flex items-start gap-3 py-3">
-            <span class="mt-1 flex-shrink-0 font-mono text-sm" style="color: var(--muted);">→</span>
-            <span class="text-base italic" style="color: var(--muted);">{c.last}</span>
+    <h2 style="font-size:clamp(2rem,4.5vw,3rem);margin-bottom:0.75rem;">{c.headline}</h2>
+    <p style="color:var(--muted);margin-bottom:3rem;font-size:1rem;">{c.sub}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0;">
+      {c.services.map((s) => (
+        <div style="display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--border);padding-right:1.5rem;">
+          <span style="font-size:1.4rem;flex-shrink:0;line-height:1.4;">{s.icon}</span>
+          <div>
+            <p style="font-weight:600;margin:0 0 0.15rem;font-size:1rem;">{s.name}</p>
+            <p style="color:var(--muted);margin:0;font-size:0.875rem;">{s.desc}</p>
           </div>
         </div>
-      </div>
+      ))}
     </div>
+    <p style="margin-top:1.5rem;color:var(--subtle);font-style:italic;font-size:0.9rem;">→ {c.last}</p>
   </div>
 </section>
 <div class="divider"></div>
