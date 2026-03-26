@@ -3,29 +3,24 @@ interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 ---
 
-<section style="padding:6rem 0 5rem;border-bottom:1px solid var(--border);">
-  <div class="container" style="max-width:780px;">
-    <p class="anim-1" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:2rem;">
+<section style="padding:5rem 0 0;border-bottom:1px solid var(--border);">
+  <div class="container">
+
+    <!-- Label -->
+    <p class="anim-1" style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;">
       {lang === 'de' ? '— Technikhilfe · Köln & Umgebung' : '— Tech Help · Cologne & surroundings'}
     </p>
-    <h1 class="anim-2" style="font-size:clamp(3rem,8vw,5.5rem);margin-bottom:0;color:var(--text);line-height:1.05;letter-spacing:-0.02em;">
+
+    <!-- Big headline -->
+    <h1 class="anim-2" style="font-size:clamp(3.5rem,10vw,7rem);line-height:1;letter-spacing:-0.03em;margin-bottom:0;color:var(--text);max-width:18ch;">
       {lang === 'de'
-        ? <Fragment>Technik&shy;probleme?<br/><span style="color:var(--terra);">Wir lösen sie.</span></Fragment>
-        : <Fragment>Tech problems?<br/><span style="color:var(--terra);">We fix them.</span></Fragment>
+        ? <Fragment>Technik&shy;probleme?<br/><em style="font-style:normal;color:var(--terra);">Wir lösen sie.</em></Fragment>
+        : <Fragment>Tech problems?<br/><em style="font-style:normal;color:var(--terra);">We fix them.</em></Fragment>
       }
     </h1>
-    <div class="anim-3" style="display:flex;flex-wrap:wrap;gap:2.5rem;margin-top:3rem;margin-bottom:3rem;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-      <div>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:2.75rem;font-weight:700;color:var(--terra);letter-spacing:-0.04em;">€29</span>
-        <span style="font-size:0.9rem;color:var(--muted);margin-left:0.5rem;">{lang === 'de' ? 'Fernwartung / 30 Min' : 'Remote / 30 min'}</span>
-      </div>
-      <div style="width:1px;background:var(--border);align-self:stretch;" class="hidden sm:block"></div>
-      <div>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:2.75rem;font-weight:700;color:var(--text);letter-spacing:-0.04em;">€79</span>
-        <span style="font-size:0.9rem;color:var(--muted);margin-left:0.5rem;">{lang === 'de' ? 'Vor Ort / Einsatz' : 'On-site / visit'}</span>
-      </div>
-    </div>
-    <div class="anim-4" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;">
+
+    <!-- CTA row -->
+    <div class="anim-3" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);">
       <a href="#assistent" class="btn-primary" style="font-size:1rem;padding:0.9rem 2rem;">
         {lang === 'de' ? 'Was kostet mein Problem? →' : 'What does my problem cost? →'}
       </a>
@@ -34,4 +29,25 @@ const { lang = 'de' } = Astro.props;
       </p>
     </div>
   </div>
+
+  <!-- Price band -->
+  <div class="anim-4" style="background:var(--terra);margin-top:4rem;">
+    <div class="container">
+      <div style="display:flex;flex-wrap:wrap;gap:0;border-left:none;">
+        <div style="padding:1.5rem 2.5rem 1.5rem 0;border-right:1px solid rgba(255,255,255,0.2);margin-right:2.5rem;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-0.04em;">€29</span>
+          <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-left:0.5rem;">{lang === 'de' ? 'Fernwartung / 30 Min' : 'Remote / 30 min'}</span>
+        </div>
+        <div style="padding:1.5rem 2.5rem 1.5rem 0;border-right:1px solid rgba(255,255,255,0.2);margin-right:2.5rem;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-0.04em;">€79</span>
+          <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-left:0.5rem;">{lang === 'de' ? 'Vor Ort / Einsatz' : 'On-site / visit'}</span>
+        </div>
+        <div style="padding:1.5rem 0;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-0.04em;">€99</span>
+          <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-left:0.5rem;">{lang === 'de' ? 'Windows 10 → 11' : 'Windows 10 → 11'}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
