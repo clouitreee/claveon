@@ -12,9 +12,68 @@ import Footer from '../../components/Footer.astro';
 const lang = 'en';
 ---
 <Layout
-  title="Tech Help Cologne – PC, WiFi & Smartphone | ClaveON from €29"
-  description="On-site tech help in Cologne: PC, WiFi, smartphone, printer, TV. Remote from €29 · On-site from €79. No corporate pricing. No per-minute billing."
+  title="PC Help Cologne · Remote from €29 · On-site from €79 | ClaveON"
+  description="Personal tech help in Cologne & surroundings: PC repair, WiFi setup, smartphone help, printer, TV. Remote from €29 · On-site from €79. No corporate pricing. Reply within 24h."
   lang={lang} canonicalPath="/en/">
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://claveon.de/#business",
+    "name": "ClaveON Tech Help Cologne",
+    "description": "Personal tech help in Cologne — PC repair, WiFi setup, smartphone help, printer & TV. Remote from €29, on-site from €79. No corporate pricing, no per-minute billing.",
+    "url": "https://claveon.de/en/",
+    "email": "info@claveon.de",
+    "image": "https://claveon.de/assets/martin.jpg",
+    "priceRange": "€29–€99",
+    "currenciesAccepted": "EUR",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cologne",
+      "addressRegion": "North Rhine-Westphalia",
+      "postalCode": "50823",
+      "addressCountry": "DE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.9333,
+      "longitude": 6.9500
+    },
+    "areaServed": [
+      {"@type":"City","name":"Cologne"},
+      {"@type":"City","name":"Hürth"},
+      {"@type":"City","name":"Frechen"},
+      {"@type":"City","name":"Leverkusen"},
+      {"@type":"City","name":"Bergisch Gladbach"}
+    ],
+    "knowsLanguage": ["de","es","en"],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Tech Help Services",
+      "itemListElement": [
+        {"@type":"Offer","name":"Remote Support","description":"Screen sharing help, 30 minutes","price":"29","priceCurrency":"EUR"},
+        {"@type":"Offer","name":"On-site Help","description":"Personal visit in Cologne & 15 km area, approx. 1 hour","price":"79","priceCurrency":"EUR"},
+        {"@type":"Offer","name":"Fresh Start Package","description":"Set up new device, transfer data, connect WiFi","price":"89","priceCurrency":"EUR"},
+        {"@type":"Offer","name":"Windows 10 to 11 Migration","description":"Upgrade or fresh setup including data migration","price":"99","priceCurrency":"EUR"}
+      ]
+    }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How much does remote support cost?","acceptedAnswer":{"@type":"Answer","text":"Remote support costs €29 for 30 minutes. If we need more time, we'll tell you first — never more without your approval."}},
+      {"@type":"Question","name":"How much does an on-site visit in Cologne cost?","acceptedAnswer":{"@type":"Answer","text":"An on-site visit costs €79. We come to you anywhere in Cologne and the surrounding area up to 15 km."}},
+      {"@type":"Question","name":"Which devices does ClaveON repair?","acceptedAnswer":{"@type":"Answer","text":"PC, laptop, Mac, smartphone, tablet, WiFi router, printer, smart TV, coffee machines and other WiFi-connected appliances."}},
+      {"@type":"Question","name":"How quickly will I get a reply?","acceptedAnswer":{"@type":"Answer","text":"We reply within 24 hours — directly, no call centre."}},
+      {"@type":"Question","name":"Can you upgrade from Windows 10 to Windows 11?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Windows 10 to 11 migration costs €99 including data migration and full setup."}}
+    ]
+  })} />
   <NavBar lang={lang} />
   <main>
     <Hero lang={lang} />

@@ -12,15 +12,71 @@ import Footer from '../components/Footer.astro';
 const lang = 'de';
 ---
 <Layout
-  title="Technikhilfe Köln – PC, WLAN & Smartphone | ClaveON ab €29"
-  description="Vor-Ort Technikhilfe in Köln: PC, WLAN, Smartphone, Drucker, TV. Fernwartung ab €29 · Vor Ort ab €79. Kein Konzernpreis. Kein Minutentakt."
+  title="PC-Hilfe Köln · Fernwartung ab €29 · Vor Ort ab €79 | ClaveON"
+  description="Technikhilfe in Köln & Umgebung: PC-Reparatur, WLAN einrichten, Smartphone-Hilfe, Drucker, TV. Fernwartung ab €29 · Vor Ort ab €79. Kein Konzernpreis. Antwort in 24h. Deutsch · Español · English."
   lang={lang} canonicalPath="/">
   <script type="application/ld+json" set:html={JSON.stringify({
-    "@context":"https://schema.org","@type":"LocalBusiness","@id":"https://claveon.de/#business",
-    "name":"ClaveON Technikhilfe Köln","url":"https://claveon.de/","email":"info@claveon.de",
-    "priceRange":"€29–€99","address":{"@type":"PostalAddress","addressLocality":"Köln","postalCode":"50823","addressCountry":"DE"},
-    "areaServed":["Köln","Hürth","Frechen","Pulheim","Leverkusen","Bergisch Gladbach","Dormagen"],
-    "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"09:00","closes":"20:00"}
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://claveon.de/#business",
+    "name": "ClaveON Technikhilfe Köln",
+    "description": "Persönliche Technikhilfe in Köln — PC-Reparatur, WLAN einrichten, Smartphone-Hilfe, Drucker & TV. Fernwartung ab €29, Vor-Ort ab €79. Kein Konzernpreis, kein Minutentakt.",
+    "url": "https://claveon.de/",
+    "email": "info@claveon.de",
+    "image": "https://claveon.de/assets/martin.jpg",
+    "priceRange": "€29–€99",
+    "currenciesAccepted": "EUR",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Köln",
+      "addressRegion": "Nordrhein-Westfalen",
+      "postalCode": "50823",
+      "addressCountry": "DE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.9333,
+      "longitude": 6.9500
+    },
+    "areaServed": [
+      {"@type":"City","name":"Köln"},
+      {"@type":"City","name":"Hürth"},
+      {"@type":"City","name":"Frechen"},
+      {"@type":"City","name":"Pulheim"},
+      {"@type":"City","name":"Leverkusen"},
+      {"@type":"City","name":"Bergisch Gladbach"},
+      {"@type":"City","name":"Dormagen"},
+      {"@type":"City","name":"Brühl"}
+    ],
+    "knowsLanguage": ["de","es","en"],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Technikhilfe Leistungen",
+      "itemListElement": [
+        {"@type":"Offer","name":"Fernwartung","description":"Remote-Hilfe per Bildschirmübertragung, 30 Minuten","price":"29","priceCurrency":"EUR"},
+        {"@type":"Offer","name":"Vor-Ort Hilfe","description":"Persönlicher Besuch in Köln & 15 km Umgebung, ca. 1 Stunde","price":"79","priceCurrency":"EUR"},
+        {"@type":"Offer","name":"Neustart-Paket","description":"Neues Gerät einrichten, Daten übertragen, WLAN verbinden","price":"89","priceCurrency":"EUR"},
+        {"@type":"Offer","name":"Windows 10 auf 11 Migration","description":"Upgrade oder Neueinrichtung inkl. Datenmigration","price":"99","priceCurrency":"EUR"}
+      ]
+    }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Was kostet die Fernwartung?","acceptedAnswer":{"@type":"Answer","text":"Die Fernwartung kostet €29 für 30 Minuten. Brauchen wir länger, sagen wir es vorher — nie mehr ohne Ihre Zustimmung."}},
+      {"@type":"Question","name":"Was kostet ein Vor-Ort-Einsatz in Köln?","acceptedAnswer":{"@type":"Answer","text":"Ein Vor-Ort-Einsatz kostet €79. Wir kommen zu Ihnen nach Köln und in die Umgebung bis 15 km."}},
+      {"@type":"Question","name":"Welche Geräte repariert ClaveON?","acceptedAnswer":{"@type":"Answer","text":"PC, Laptop, Mac, Smartphone, Tablet, WLAN-Router, Drucker, Smart-TV, Kaffeevollautomat und andere Haushaltsgeräte mit WLAN."}},
+      {"@type":"Question","name":"Wie schnell bekomme ich eine Antwort?","acceptedAnswer":{"@type":"Answer","text":"Wir antworten innerhalb von 24 Stunden — direkt, ohne Callcenter."}},
+      {"@type":"Question","name":"In welchen Stadtteilen von Köln sind Sie tätig?","acceptedAnswer":{"@type":"Answer","text":"Wir sind in ganz Köln tätig — Ehrenfeld, Nippes, Sülz, Lindenthal, Deutz, Mülheim, Porz, Rodenkirchen, Chorweiler und alle weiteren Stadtteile sowie Umgebung bis 15 km."}},
+      {"@type":"Question","name":"Können Sie auch Windows 10 auf Windows 11 umstellen?","acceptedAnswer":{"@type":"Answer","text":"Ja, die Windows 10 auf 11 Migration kostet €99 inklusive Datenmigration und vollständiger Einrichtung."}}
+    ]
   })} />
   <NavBar lang={lang} />
   <main>
