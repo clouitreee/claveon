@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="22" fill="#C1440E"/>
+  <text x="90" y="128" text-anchor="middle"
+        font-family="'Courier New', monospace"
+        font-weight="900"
+        font-size="82"
+        letter-spacing="-3"
+        fill="#ffffff">ON</text>
+</svg>
