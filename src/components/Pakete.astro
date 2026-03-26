@@ -24,10 +24,10 @@ const de = {
     other: { q: 'Was brauchen Sie?', opts: [{ id: 'remote', label: 'Fernhilfe reicht' }, { id: 'onsite', label: 'Jemand soll vorbeikommen' }, { id: 'unsure', label: 'Ich bin nicht sicher' }]},
   },
   results: {
-    remote:    { pkg: 'Fernwartung', price: '€25', unit: '/ 30 Min', how: 'Per Bildschirmübertragung — wir verbinden uns mit Ihrem Gerät.', time: '30 Minuten', note: 'Brauchen wir länger? Wir sagen es vorher — nie mehr ohne Ihre Zustimmung.', tv_link: true },
-    onsite:    { pkg: 'Vor-Ort Hilfe', price: '€49', unit: '/ Einsatz', how: 'Wir kommen zu Ihnen — Köln & bis zu 15 km Umgebung.', time: 'Ca. 1 Stunde', note: 'Dauert es länger? Wir sprechen vorher darüber. Kein Konzernpreis.', tv_link: false },
-    neustart:  { pkg: 'Neustart-Paket', price: '€79', unit: '/ Einsatz', how: 'Neues Gerät einrichten, Daten übertragen, WLAN verbinden.', time: 'Ca. 1,5–2 Stunden', note: 'Alles erklärt, alles eingerichtet. Kein Konzernpreis.', tv_link: false },
-    migration: { pkg: 'Windows 10 → 11', price: '€89', unit: '/ Einsatz', how: 'Upgrade oder neues Gerät — komplett eingerichtet und erklärt.', time: 'Ca. 2 Stunden', note: 'Inkl. Datenmigration. Kein Konzernpreis.', tv_link: false },
+    remote:    { pkg: 'Fernwartung', price: '€29', unit: '/ 30 Min', how: 'Per Bildschirmübertragung — wir verbinden uns mit Ihrem Gerät.', time: '30 Minuten', note: 'Brauchen wir länger? Wir sagen es vorher — nie mehr ohne Ihre Zustimmung.', tv_link: true },
+    onsite:    { pkg: 'Vor-Ort Hilfe', price: '€79', unit: '/ Einsatz', how: 'Wir kommen zu Ihnen — Köln & bis zu 15 km Umgebung.', time: 'Ca. 1 Stunde', note: 'Dauert es länger? Wir sprechen vorher darüber. Kein Konzernpreis.', tv_link: false },
+    neustart:  { pkg: 'Neustart-Paket', price: '€89', unit: '/ Einsatz', how: 'Neues Gerät einrichten, Daten übertragen, WLAN verbinden.', time: 'Ca. 1,5–2 Stunden', note: 'Alles erklärt, alles eingerichtet. Kein Konzernpreis.', tv_link: false },
+    migration: { pkg: 'Windows 10 → 11', price: '€99', unit: '/ Einsatz', how: 'Upgrade oder neues Gerät — komplett eingerichtet und erklärt.', time: 'Ca. 2 Stunden', note: 'Inkl. Datenmigration. Kein Konzernpreis.', tv_link: false },
   },
   werixo: 'Für Unternehmens-IT empfehlen wir WERIXO — professioneller Managed Service für KMU.',
   werixoCta: 'werixo.de besuchen ↗',
@@ -50,10 +50,10 @@ const en = {
     other: { q: 'What do you need?', opts: [{ id: 'remote', label: 'Remote help is enough' }, { id: 'onsite', label: 'Someone should come over' }, { id: 'unsure', label: "I'm not sure" }]},
   },
   results: {
-    remote:    { pkg: 'Remote Support', price: '€25', unit: '/ 30 min', how: 'Via screen sharing — we connect to your device.', time: '30 minutes', note: 'Need more time? We tell you first — never more without your approval.', tv_link: true },
-    onsite:    { pkg: 'On-site Help', price: '€49', unit: '/ visit', how: 'We come to you — Cologne & up to 15 km area.', time: 'Approx. 1 hour', note: 'Takes longer? We discuss it first. No corporate pricing.', tv_link: false },
-    neustart:  { pkg: 'Fresh Start Package', price: '€79', unit: '/ visit', how: 'Set up new device, transfer data, connect WiFi.', time: 'Approx. 1.5–2 hours', note: 'Everything set up and explained. No corporate pricing.', tv_link: false },
-    migration: { pkg: 'Windows 10 → 11', price: '€89', unit: '/ visit', how: 'Upgrade or new device — fully set up and explained.', time: 'Approx. 2 hours', note: 'Includes data migration. No corporate pricing.', tv_link: false },
+    remote:    { pkg: 'Remote Support', price: '€29', unit: '/ 30 min', how: 'Via screen sharing — we connect to your device.', time: '30 minutes', note: 'Need more time? We tell you first — never more without your approval.', tv_link: true },
+    onsite:    { pkg: 'On-site Help', price: '€79', unit: '/ visit', how: 'We come to you — Cologne & up to 15 km area.', time: 'Approx. 1 hour', note: 'Takes longer? We discuss it first. No corporate pricing.', tv_link: false },
+    neustart:  { pkg: 'Fresh Start Package', price: '€89', unit: '/ visit', how: 'Set up new device, transfer data, connect WiFi.', time: 'Approx. 1.5–2 hours', note: 'Everything set up and explained. No corporate pricing.', tv_link: false },
+    migration: { pkg: 'Windows 10 → 11', price: '€99', unit: '/ visit', how: 'Upgrade or new device — fully set up and explained.', time: 'Approx. 2 hours', note: 'Includes data migration. No corporate pricing.', tv_link: false },
   },
   werixo: 'For business IT we recommend WERIXO — professional Managed Service for SMEs.',
   werixoCta: 'Visit werixo.de ↗',
@@ -105,7 +105,10 @@ const c = lang === 'en' ? en : de;
     <div id="result" style="display:none;"></div>
     <div id="werixo-block" style="display:none;" class="result-card">
       <p style="font-size:1rem;color:var(--muted);margin-bottom:1.25rem;">{c.werixo}</p>
-      <a href="https://werixo.de" target="_blank" rel="noopener" class="btn-primary">{c.werixoCta}</a>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+        <a href="https://werixo.de" target="_blank" rel="noopener" class="btn-primary">{c.werixoCta}</a>
+        <button id="back-werixo" style="background:none;border:none;cursor:pointer;font-size:0.875rem;color:var(--muted);font-family:'IBM Plex Sans',sans-serif;">{c.back}</button>
+      </div>
     </div>
     <p style="margin-top:2.5rem;font-size:0.85rem;color:var(--subtle);font-family:'IBM Plex Mono',monospace;">→ {c.fallback}</p>
   </div>
@@ -128,9 +131,12 @@ const c = lang === 'en' ? en : de;
     });
   };
   const resultKey = (dev, prob) => {
-    if (dev === 'pc' && prob === 'setup') return 'migration';
-    if (dev === 'pc' || dev === 'handy' || dev === 'wlan') return 'remote';
-    if (dev === 'tv') return 'onsite';
+    if (dev === 'pc' && prob === 'setup') return 'migration';  // W10→11 €99
+    if (dev === 'pc') return 'remote';                          // slow/virus €29
+    if (dev === 'handy') return 'onsite';                       // phone = vor Ort €79
+    if (dev === 'wlan' && prob === 'new') return 'onsite';      // new router €79
+    if (dev === 'wlan') return 'remote';                        // fix WLAN €29
+    if (dev === 'tv') return 'onsite';                          // €79
     if (prob === 'remote') return 'remote';
     if (prob === 'onsite') return 'onsite';
     return 'onsite';
@@ -192,4 +198,5 @@ const c = lang === 'en' ? en : de;
   });
   document.getElementById('back-1')?.addEventListener('click', () => { show('step-1'); setDots(1); });
   document.getElementById('back-2')?.addEventListener('click', () => { show('step-2'); setDots(2); });
+  document.getElementById('back-werixo')?.addEventListener('click', () => { show('step-1'); setDots(1); });
 </script>

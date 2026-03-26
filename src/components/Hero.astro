@@ -1,46 +1,100 @@
 ---
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
+
+const services = lang === 'de' ? [
+  { icon: '💻', label: 'PC / Laptop', price: '€29', note: 'Fernwartung' },
+  { icon: '📱', label: 'Handy / Tablet', price: '€79', note: 'Vor Ort' },
+  { icon: '📡', label: 'WLAN / Router', price: '€29', note: 'Fernwartung' },
+  { icon: '📺', label: 'TV / Drucker', price: '€79', note: 'Vor Ort' },
+  { icon: '☕', label: 'Haushaltsgeräte', price: '€79', note: 'Vor Ort' },
+] : [
+  { icon: '💻', label: 'PC / Laptop', price: '€29', note: 'Remote' },
+  { icon: '📱', label: 'Phone / Tablet', price: '€79', note: 'On-site' },
+  { icon: '📡', label: 'WiFi / Router', price: '€29', note: 'Remote' },
+  { icon: '📺', label: 'TV / Printer', price: '€79', note: 'On-site' },
+  { icon: '☕', label: 'Appliances', price: '€79', note: 'On-site' },
+];
 ---
+
 <section style="padding:5rem 0 4rem;border-bottom:1px solid var(--border);">
   <div class="container">
-    <p class="anim-1" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:1.5rem;">
-      {lang === 'de' ? '— Technikhilfe · Köln & Umgebung' : '— Tech Help · Cologne & surroundings'}
-    </p>
-    <h1 class="anim-2" style="font-size:clamp(2.8rem,7vw,5.5rem);margin-bottom:0;color:var(--text);max-width:14ch;">
-      {lang === 'de'
-        ? <Fragment>Technik&shy;probleme?<br/><span style="color:var(--terra);">Wir lösen sie.</span></Fragment>
-        : <Fragment>Tech problems?<br/><span style="color:var(--terra);">We fix them.</span></Fragment>
-      }
-    </h1>
-    <div class="anim-3" style="display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;margin-bottom:2.5rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+
+      <!-- Left: headline + prices + CTA -->
       <div>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:2.5rem;font-weight:700;color:var(--terra);letter-spacing:-0.04em;">€25</span>
-        <span style="font-size:0.9rem;color:var(--muted);margin-left:0.4rem;">{lang === 'de' ? 'Fernwartung / 30 Min' : 'Remote / 30 min'}</span>
+        <p class="anim-1" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:1.5rem;">
+          {lang === 'de' ? '— Technikhilfe · Köln & Umgebung' : '— Tech Help · Cologne & surroundings'}
+        </p>
+        <h1 class="anim-2" style="font-size:clamp(2.6rem,6vw,4.5rem);margin-bottom:0;color:var(--text);line-height:1.1;">
+          {lang === 'de'
+            ? <Fragment>Technik&shy;probleme?<br/><span style="color:var(--terra);">Wir lösen sie.</span></Fragment>
+            : <Fragment>Tech problems?<br/><span style="color:var(--terra);">We fix them.</span></Fragment>
+          }
+        </h1>
+        <div class="anim-3" style="display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;margin-bottom:2.5rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+          <div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:2.25rem;font-weight:700;color:var(--terra);letter-spacing:-0.04em;">€29</span>
+            <span style="font-size:0.875rem;color:var(--muted);margin-left:0.4rem;">{lang === 'de' ? 'Fernwartung / 30 Min' : 'Remote / 30 min'}</span>
+          </div>
+          <div style="width:1px;background:var(--border);align-self:stretch;" class="hidden sm:block"></div>
+          <div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:2.25rem;font-weight:700;color:var(--text);letter-spacing:-0.04em;">€79</span>
+            <span style="font-size:0.875rem;color:var(--muted);margin-left:0.4rem;">{lang === 'de' ? 'Vor Ort / Einsatz' : 'On-site / visit'}</span>
+          </div>
+        </div>
+        <div class="anim-4" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;">
+          <a href="#assistent" class="btn-primary" style="font-size:1rem;">
+            {lang === 'de' ? 'Was kostet mein Problem? →' : 'What does my problem cost? →'}
+          </a>
+          <p style="font-size:0.9rem;color:var(--muted);margin:0;">
+            {lang === 'de' ? 'Kein Konzernpreis. Kein Minutentakt.' : 'No corporate price. No per-minute billing.'}
+          </p>
+        </div>
+        <div class="anim-5" style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2.5rem;">
+          {(lang === 'de'
+            ? ['Köln & 15 km Umgebung', 'Antwort in 24h', 'Deutsch · Español · English']
+            : ['Cologne & 15 km area', 'Reply within 24h', 'Deutsch · Español · English']
+          ).map(item => (
+            <span style="font-size:0.85rem;color:var(--subtle);display:flex;align-items:center;gap:0.4rem;">
+              <span style="color:var(--green);font-weight:700;">✓</span> {item}
+            </span>
+          ))}
+        </div>
       </div>
-      <div style="width:1px;background:var(--border);align-self:stretch;" class="hidden sm:block"></div>
-      <div>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:2.5rem;font-weight:700;color:var(--text);letter-spacing:-0.04em;">€49</span>
-        <span style="font-size:0.9rem;color:var(--muted);margin-left:0.4rem;">{lang === 'de' ? 'Vor Ort / Einsatz' : 'On-site / visit'}</span>
+
+      <!-- Right: service cards panel -->
+      <div class="anim-3" style="background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+        <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);background:var(--terra);">
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin:0;">
+            {lang === 'de' ? 'Was wir reparieren' : 'What we fix'}
+          </p>
+        </div>
+        {services.map((s, i) => (
+          <div style={`display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:${i < services.length - 1 ? '1px solid var(--border)' : 'none'};`}>
+            <div style="display:flex;align-items:center;gap:0.875rem;">
+              <span style="font-size:1.1rem;">{s.icon}</span>
+              <span style="font-size:0.95rem;font-weight:500;">{s.label}</span>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:700;color:var(--terra);">{s.price}</span>
+              <span style="font-size:0.75rem;color:var(--subtle);display:block;font-family:'IBM Plex Mono',monospace;">{s.note}</span>
+            </div>
+          </div>
+        ))}
+        <div style="padding:1rem 1.5rem;background:var(--bg);">
+          <a href="#leistungen" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--terra);text-decoration:none;">
+            {lang === 'de' ? 'Alle Leistungen ansehen →' : 'View all services →'}
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="anim-4" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;">
-      <a href="#assistent" class="btn-primary" style="font-size:1rem;">
-        {lang === 'de' ? 'Was kostet mein Problem? →' : 'What does my problem cost? →'}
-      </a>
-      <p style="font-size:0.9rem;color:var(--muted);margin:0;">
-        {lang === 'de' ? 'Kein Konzernpreis. Kein Minutentakt.' : 'No corporate price. No per-minute billing.'}
-      </p>
-    </div>
-    <div class="anim-5" style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:3rem;">
-      {(lang === 'de'
-        ? ['PC · Mac · WLAN · TV · Drucker', 'Köln & 15 km Umgebung', 'Antwort in 24h', 'Deutsch · Español · English']
-        : ['PC · Mac · WiFi · TV · Printer', 'Cologne & 15 km area', 'Reply within 24h', 'Deutsch · Español · English']
-      ).map(item => (
-        <span style="font-size:0.85rem;color:var(--subtle);display:flex;align-items:center;gap:0.4rem;">
-          <span style="color:var(--green);font-weight:700;">✓</span> {item}
-        </span>
-      ))}
+
     </div>
   </div>
 </section>
+
+<style>
+@media (max-width: 768px) {
+  section > .container > div { grid-template-columns: 1fr !important; gap: 3rem !important; }
+}
+</style>

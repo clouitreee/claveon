@@ -1,60 +1,258 @@
 ---
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
-const t = {
-  de: {
-    headline: 'Wenn es Strom hat, schauen wir es uns an.',
-    sub: 'Markenunabhängig. Erklärt in einfachem Deutsch.',
-    services: [
-      { icon: '💻', name: 'PC & Laptop', desc: 'Langsam, Absturz, Viren, Neueinrichtung' },
-      { icon: '📱', name: 'iPhone & Android', desc: 'Einrichtung, Fotos sichern, Apps, Updates' },
-      { icon: '📡', name: 'WLAN & Router', desc: 'Kein Internet, schwaches Signal, neuer Router' },
-      { icon: '📺', name: 'Smart TV & Streaming', desc: 'Netflix, Prime, ARD, Mediathek, Sender' },
-      { icon: '🖨️', name: 'Drucker & Scanner', desc: 'Installation, WLAN-Druck, Fehlermeldungen' },
-      { icon: '☕', name: 'Kaffeevollautomat', desc: 'Jura · DeLonghi · Siemens EQ — App & Einrichtung' },
-      { icon: '🤖', name: 'Saugroboter & Smart Home', desc: 'Roomba, Alexa, Google Home, Philips Hue' },
-      { icon: '🔑', name: 'Passwörter & E-Mail', desc: 'Vergessen, neues Konto, Sicherheit' },
-      { icon: '📷', name: 'Fotos & Backups', desc: 'Übertragung, Cloud, externe Festplatte' },
-      { icon: '🪟', name: 'Windows 10 → 11', desc: 'Upgrade-Beratung, Migration, Neugerät einrichten' },
-    ],
-    last: 'Alles andere — einfach fragen.',
-  },
-  en: {
-    headline: "If it needs power, we'll take a look.",
-    sub: 'Brand independent. Explained in plain language.',
-    services: [
-      { icon: '💻', name: 'PC & Laptop', desc: 'Slow, crashes, viruses, fresh setup' },
-      { icon: '📱', name: 'iPhone & Android', desc: 'Setup, photo backup, apps, updates' },
-      { icon: '📡', name: 'WiFi & Router', desc: 'No internet, weak signal, new router' },
-      { icon: '📺', name: 'Smart TV & Streaming', desc: 'Netflix, Prime, channels, media library' },
-      { icon: '🖨️', name: 'Printer & Scanner', desc: 'Installation, wireless printing, errors' },
-      { icon: '☕', name: 'Coffee machine', desc: 'Jura · DeLonghi · Siemens EQ — app & setup' },
-      { icon: '🤖', name: 'Robot vacuum & Smart Home', desc: 'Roomba, Alexa, Google Home, Philips Hue' },
-      { icon: '🔑', name: 'Passwords & Email', desc: 'Forgotten, new account, security' },
-      { icon: '📷', name: 'Photos & Backups', desc: 'Transfer, cloud, external drive' },
-      { icon: '🪟', name: 'Windows 10 → 11', desc: 'Upgrade advice, migration, new device setup' },
-    ],
-    last: "Anything else — just ask.",
-  }
+
+const de = {
+  headline: 'Wenn es Strom hat, schauen wir es uns an.',
+  sub: 'Markenunabhängig. Erklärt in einfachem Deutsch. Klicken Sie auf einen Dienst für mehr Details.',
+  last: 'Alles andere — einfach fragen.',
+  cta: 'Jetzt anfragen →',
+  priceLabel: 'Preis',
+  timeLabel: 'Dauer',
+  services: [
+    {
+      id: 'pc', icon: '💻', name: 'PC & Laptop',
+      desc: 'Langsam, Absturz, Viren, Neueinrichtung',
+      price: '€29 Fernwartung · €79 Vor-Ort', time: '30–60 Min',
+      steps: ['Problem genau besprechen & diagnostizieren', 'Fernwartung via TeamViewer (wenn möglich)', 'Viren entfernen, System optimieren, Updates', 'Neueinrichtung falls nötig', 'Alles testen & Schritt für Schritt erklären'],
+    },
+    {
+      id: 'handy', icon: '📱', name: 'iPhone & Android',
+      desc: 'Einrichtung, Fotos sichern, Apps, Updates',
+      price: '€79 Vor-Ort', time: 'Ca. 1 Stunde',
+      steps: ['Gerät & Bedürfnisse besprechen', 'Apps installieren & einrichten', 'Fotos & Kontakte sichern / übertragen', 'E-Mail & WLAN einrichten', 'Alles erklären — in Ihrem Tempo'],
+    },
+    {
+      id: 'wlan', icon: '📡', name: 'WLAN & Router',
+      desc: 'Kein Internet, schwaches Signal, neuer Router',
+      price: '€29 Fernwartung · €79 Vor-Ort', time: '30–60 Min',
+      steps: ['Aktuelle Situation & Störungsquelle prüfen', 'Router neu konfigurieren', 'Alle Geräte verbinden', 'Signal optimieren (Platzierung, Kanal)', 'Passwort sichern & notieren'],
+    },
+    {
+      id: 'tv', icon: '📺', name: 'Smart TV & Streaming',
+      desc: 'Netflix, Prime, ARD, Mediathek, Sender',
+      price: '€79 Vor-Ort', time: 'Ca. 1 Stunde',
+      steps: ['Gerät auspacken & aufstellen (falls neu)', 'WLAN verbinden & Updates installieren', 'Sender sortieren (bis zu 15 Favoriten)', 'Netflix, Prime Video, ARD Mediathek einrichten', 'Fernbedienung & Funktionen erklären'],
+    },
+    {
+      id: 'drucker', icon: '🖨️', name: 'Drucker & Scanner',
+      desc: 'Installation, WLAN-Druck, Fehlermeldungen',
+      price: '€79 Vor-Ort', time: 'Ca. 1 Stunde',
+      steps: ['Drucker auspacken & aufstellen (falls neu)', 'Treiber installieren', 'WLAN-Druck einrichten (alle Geräte)', 'Testdruck durchführen', 'Scanner-Funktion einrichten & testen'],
+    },
+    {
+      id: 'kaffee', icon: '☕', name: 'Kaffeevollautomat',
+      desc: 'Jura · DeLonghi · Siemens EQ — App & Einrichtung',
+      price: '€79 Vor-Ort', time: 'Ca. 1 Stunde',
+      steps: ['Gerät aufstellen & anschließen', 'App verbinden (Jura, DeLonghi, Siemens)', 'Grundeinstellungen & Mahlgrad konfigurieren', 'Erste Tasse zusammen zubereiten', 'Reinigungsprogramm & Wartung erklären'],
+    },
+    {
+      id: 'smarthome', icon: '🤖', name: 'Saugroboter & Smart Home',
+      desc: 'Roomba, Alexa, Google Home, Philips Hue',
+      price: '€79 Vor-Ort', time: 'Ca. 1 Stunde',
+      steps: ['Gerät einrichten & WLAN verbinden', 'App installieren & koppeln', 'Raumkarte erstellen / Zonen einrichten', 'Zeitplan & Automatisierungen einrichten', 'Alexa / Google Home verbinden'],
+    },
+    {
+      id: 'passwort', icon: '🔑', name: 'Passwörter & E-Mail',
+      desc: 'Vergessen, neues Konto, Sicherheit',
+      price: '€29 Fernwartung', time: '30 Min',
+      steps: ['Was ist verloren / was wird gebraucht?', 'Passwort sicher zurücksetzen', 'Neues Konto einrichten (falls nötig)', 'E-Mail-Client auf allen Geräten einrichten', 'Tipps für sichere & merkbare Passwörter'],
+    },
+    {
+      id: 'fotos', icon: '📷', name: 'Fotos & Backups',
+      desc: 'Übertragung, Cloud, externe Festplatte',
+      price: '€29 Fernwartung · €79 Vor-Ort', time: '30–60 Min',
+      steps: ['Vorhandene Fotos sichten & sortieren', 'Backup-Strategie besprechen', 'Cloud einrichten (iCloud, Google Fotos)', 'Externe Festplatte einrichten', 'Fotos übertragen & sicher aufbewahren'],
+    },
+    {
+      id: 'windows', icon: '🪟', name: 'Windows 10 → 11',
+      desc: 'Upgrade-Beratung, Migration, Neugerät einrichten',
+      price: '€99 Vor-Ort', time: 'Ca. 2 Stunden',
+      steps: ['Kompatibilität des Geräts prüfen', 'Vollständiges Backup erstellen', 'Windows 11 installieren oder Neugerät einrichten', 'Alle Daten & Einstellungen übertragen', 'Unterschiede erklären — alles vertraut machen'],
+    },
+  ],
 };
-const c = t[lang as keyof typeof t] ?? t.de;
+
+const en = {
+  headline: "If it needs power, we'll take a look.",
+  sub: 'Brand independent. Explained in plain language. Click a service for details.',
+  last: 'Anything else — just ask.',
+  cta: 'Request now →',
+  priceLabel: 'Price',
+  timeLabel: 'Duration',
+  services: [
+    {
+      id: 'pc', icon: '💻', name: 'PC & Laptop',
+      desc: 'Slow, crashes, viruses, fresh setup',
+      price: '€29 Remote · €79 On-site', time: '30–60 min',
+      steps: ['Diagnose the exact problem', 'Remote support via TeamViewer (if possible)', 'Remove viruses, optimize, update', 'Fresh setup if needed', 'Test everything & explain step by step'],
+    },
+    {
+      id: 'handy', icon: '📱', name: 'iPhone & Android',
+      desc: 'Setup, photo backup, apps, updates',
+      price: '€79 On-site', time: 'Approx. 1 hour',
+      steps: ['Discuss device & needs', 'Install & configure apps', 'Backup & transfer photos and contacts', 'Set up email & WiFi', 'Explain everything — at your pace'],
+    },
+    {
+      id: 'wlan', icon: '📡', name: 'WiFi & Router',
+      desc: 'No internet, weak signal, new router',
+      price: '€29 Remote · €79 On-site', time: '30–60 min',
+      steps: ['Check current situation & find issue', 'Reconfigure router', 'Connect all devices', 'Optimize signal (placement, channel)', 'Secure password & write it down'],
+    },
+    {
+      id: 'tv', icon: '📺', name: 'Smart TV & Streaming',
+      desc: 'Netflix, Prime, channels, media library',
+      price: '€79 On-site', time: 'Approx. 1 hour',
+      steps: ['Unbox & set up (if new)', 'Connect WiFi & install updates', 'Sort channels (up to 15 favorites)', 'Set up Netflix, Prime Video, streaming apps', 'Explain remote & features'],
+    },
+    {
+      id: 'drucker', icon: '🖨️', name: 'Printer & Scanner',
+      desc: 'Installation, wireless printing, errors',
+      price: '€79 On-site', time: 'Approx. 1 hour',
+      steps: ['Unbox & set up (if new)', 'Install drivers', 'Set up wireless printing (all devices)', 'Test print', 'Set up & test scanner'],
+    },
+    {
+      id: 'kaffee', icon: '☕', name: 'Coffee machine',
+      desc: 'Jura · DeLonghi · Siemens EQ — app & setup',
+      price: '€79 On-site', time: 'Approx. 1 hour',
+      steps: ['Set up & connect device', 'Connect app (Jura, DeLonghi, Siemens)', 'Configure settings & grind level', 'Make first cup together', 'Explain cleaning & maintenance'],
+    },
+    {
+      id: 'smarthome', icon: '🤖', name: 'Robot vacuum & Smart Home',
+      desc: 'Roomba, Alexa, Google Home, Philips Hue',
+      price: '€79 On-site', time: 'Approx. 1 hour',
+      steps: ['Set up device & connect to WiFi', 'Install app & pair', 'Create room map / set zones', 'Set up schedule & automations', 'Connect Alexa / Google Home'],
+    },
+    {
+      id: 'passwort', icon: '🔑', name: 'Passwords & Email',
+      desc: 'Forgotten, new account, security',
+      price: '€29 Remote', time: '30 min',
+      steps: ["What's lost / what's needed?", 'Safely reset password', 'Set up new account (if needed)', 'Configure email on all devices', 'Tips for secure & memorable passwords'],
+    },
+    {
+      id: 'fotos', icon: '📷', name: 'Photos & Backups',
+      desc: 'Transfer, cloud, external drive',
+      price: '€29 Remote · €79 On-site', time: '30–60 min',
+      steps: ['Review & sort existing photos', 'Discuss backup strategy', 'Set up cloud (iCloud, Google Photos)', 'Set up external drive', 'Transfer & safely store photos'],
+    },
+    {
+      id: 'windows', icon: '🪟', name: 'Windows 10 → 11',
+      desc: 'Upgrade advice, migration, new device setup',
+      price: '€99 On-site', time: 'Approx. 2 hours',
+      steps: ['Check device compatibility', 'Create full backup', 'Install Windows 11 or set up new device', 'Transfer all data & settings', 'Explain differences — make everything familiar'],
+    },
+  ],
+};
+
+const c = lang === 'en' ? en : de;
 ---
+
 <section class="section" id="leistungen" data-reveal>
   <div class="container">
     <h2 style="font-size:clamp(2rem,4.5vw,3rem);margin-bottom:0.75rem;">{c.headline}</h2>
-    <p style="color:var(--muted);margin-bottom:3rem;font-size:1rem;">{c.sub}</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0;">
+    <p style="color:var(--muted);margin-bottom:2.5rem;font-size:1rem;">{c.sub}</p>
+
+    <div id="services-list">
       {c.services.map((s) => (
-        <div style="display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--border);padding-right:1.5rem;">
-          <span style="font-size:1.4rem;flex-shrink:0;line-height:1.4;">{s.icon}</span>
-          <div>
-            <p style="font-weight:600;margin:0 0 0.15rem;font-size:1rem;">{s.name}</p>
-            <p style="color:var(--muted);margin:0;font-size:0.875rem;">{s.desc}</p>
+        <div class="svc-item" data-id={s.id} style="border-bottom:1px solid var(--border);">
+          <!-- Header row (clickable) -->
+          <button
+            class="svc-header"
+            aria-expanded="false"
+            style="width:100%;display:flex;align-items:center;gap:1rem;padding:1.25rem 0;background:none;border:none;cursor:pointer;text-align:left;"
+          >
+            <span style="font-size:1.5rem;flex-shrink:0;line-height:1;">{s.icon}</span>
+            <div style="flex:1;min-width:0;">
+              <p style="font-weight:600;margin:0;font-size:1rem;color:var(--text);">{s.name}</p>
+              <p style="color:var(--muted);margin:0;font-size:0.875rem;">{s.desc}</p>
+            </div>
+            <span class="svc-arrow" style="font-size:1rem;color:var(--terra);transition:transform 0.25s;flex-shrink:0;">↓</span>
+          </button>
+
+          <!-- Expandable panel -->
+          <div class="svc-panel" style="display:none;padding-bottom:1.5rem;padding-left:2.5rem;">
+            <div style="display:grid;gap:0.5rem;margin-bottom:1.25rem;">
+              {s.steps.map((step, i) => (
+                <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;font-weight:700;color:var(--terra);flex-shrink:0;margin-top:0.2rem;min-width:1.25rem;">{i + 1}.</span>
+                  <span style="font-size:0.95rem;color:var(--muted);line-height:1.5;">{step}</span>
+                </div>
+              ))}
+            </div>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem;padding-top:1rem;border-top:1px solid var(--border);">
+              <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+                <span style="font-size:0.85rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--terra);">{s.price}</span>
+                </span>
+                <span style="font-size:0.85rem;color:var(--subtle);font-family:'IBM Plex Mono',monospace;">⏱ {s.time}</span>
+              </div>
+              <a href="#kontakt" class="btn-primary" style="font-size:0.85rem;padding:0.6rem 1.25rem;" data-svc={s.id}>
+                {c.cta}
+              </a>
+            </div>
           </div>
         </div>
       ))}
     </div>
+
     <p style="margin-top:1.5rem;color:var(--subtle);font-style:italic;font-size:0.9rem;">→ {c.last}</p>
   </div>
 </section>
 <div class="divider"></div>
+
+<script>
+  document.querySelectorAll('.svc-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.svc-item') as HTMLElement;
+      const panel = item.querySelector('.svc-panel') as HTMLElement;
+      const arrow = btn.querySelector('.svc-arrow') as HTMLElement;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      // Close all others
+      document.querySelectorAll('.svc-item').forEach(other => {
+        if (other !== item) {
+          const otherPanel = other.querySelector('.svc-panel') as HTMLElement;
+          const otherBtn = other.querySelector('.svc-header') as HTMLElement;
+          const otherArrow = other.querySelector('.svc-arrow') as HTMLElement;
+          if (otherPanel) otherPanel.style.display = 'none';
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+          if (other instanceof HTMLElement) other.style.background = '';
+        }
+      });
+
+      if (isOpen) {
+        panel.style.display = 'none';
+        btn.setAttribute('aria-expanded', 'false');
+        arrow.style.transform = 'rotate(0deg)';
+        item.style.background = '';
+      } else {
+        panel.style.display = 'block';
+        btn.setAttribute('aria-expanded', 'true');
+        arrow.style.transform = 'rotate(180deg)';
+        item.style.background = 'var(--terra-light)';
+        item.style.borderRadius = '6px';
+        item.style.padding = '0 1rem';
+        item.style.margin = '0 -1rem';
+      }
+    });
+  });
+
+  // CTA pre-fills contact form
+  document.querySelectorAll('[data-svc]').forEach(link => {
+    link.addEventListener('click', () => {
+      const svcId = (link as HTMLElement).dataset.svc;
+      const select = document.querySelector('[name="paket"]') as HTMLSelectElement;
+      if (select && svcId) {
+        // Map service id to paket option value
+        const map: Record<string, string> = {
+          pc: 'remote', handy: 'onsite', wlan: 'remote',
+          tv: 'onsite', drucker: 'onsite', kaffee: 'onsite',
+          smarthome: 'onsite', passwort: 'remote', fotos: 'remote',
+          windows: 'migration',
+        };
+        select.value = map[svcId] ?? '';
+      }
+    });
+  });
+</script>

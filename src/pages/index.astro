@@ -7,17 +7,18 @@ import Services from '../components/Services.astro';
 import Pakete from '../components/Pakete.astro';
 import UeberMartin from '../components/UeberMartin.astro';
 import Kontakt from '../components/Kontakt.astro';
+import WerixoBridge from '../components/WerixoBridge.astro';
 import Footer from '../components/Footer.astro';
 const lang = 'de';
 ---
 <Layout
-  title="Technikhilfe Köln – PC, WLAN & Smartphone | ClaveON ab €25"
-  description="Vor-Ort Technikhilfe in Köln: PC, WLAN, Smartphone, Drucker, TV. Fernwartung ab €25 · Vor Ort ab €49. Kein Konzernpreis. Kein Minutentakt."
+  title="Technikhilfe Köln – PC, WLAN & Smartphone | ClaveON ab €29"
+  description="Vor-Ort Technikhilfe in Köln: PC, WLAN, Smartphone, Drucker, TV. Fernwartung ab €29 · Vor Ort ab €79. Kein Konzernpreis. Kein Minutentakt."
   lang={lang} canonicalPath="/">
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context":"https://schema.org","@type":"LocalBusiness","@id":"https://claveon.de/#business",
     "name":"ClaveON Technikhilfe Köln","url":"https://claveon.de/","email":"info@claveon.de",
-    "priceRange":"€25–€89","address":{"@type":"PostalAddress","addressLocality":"Köln","postalCode":"50823","addressCountry":"DE"},
+    "priceRange":"€29–€99","address":{"@type":"PostalAddress","addressLocality":"Köln","postalCode":"50823","addressCountry":"DE"},
     "areaServed":["Köln","Hürth","Frechen","Pulheim","Leverkusen","Bergisch Gladbach","Dormagen"],
     "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"09:00","closes":"20:00"}
   })} />
@@ -30,5 +31,6 @@ const lang = 'de';
     <UeberMartin lang={lang} />
     <Kontakt lang={lang} />
   </main>
+  <WerixoBridge lang={lang} />
   <Footer lang={lang} />
 </Layout>
