@@ -31,23 +31,65 @@ const { lang = 'de' } = Astro.props;
   </div>
 
   <!-- Price band -->
-  <div class="anim-4" style="background:var(--terra);margin-top:4rem;">
+  <div class="anim-4 price-band" style="background:var(--terra);margin-top:4rem;">
     <div class="container">
-      <div style="display:flex;flex-wrap:wrap;gap:0;border-left:none;">
-        <div style="padding:1.5rem 2.5rem 1.5rem 0;border-right:1px solid rgba(255,255,255,0.2);margin-right:2.5rem;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-0.04em;">€29</span>
-          <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-left:0.5rem;">{lang === 'de' ? 'Fernwartung / 30 Min' : 'Remote / 30 min'}</span>
+      <div class="price-band-inner">
+        <div class="price-item price-item--bordered">
+          <span class="price-num">€29</span>
+          <span class="price-label">{lang === 'de' ? 'Fernwartung / 30 Min' : 'Remote / 30 min'}</span>
         </div>
-        <div style="padding:1.5rem 2.5rem 1.5rem 0;border-right:1px solid rgba(255,255,255,0.2);margin-right:2.5rem;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-0.04em;">€79</span>
-          <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-left:0.5rem;">{lang === 'de' ? 'Vor Ort / Einsatz' : 'On-site / visit'}</span>
+        <div class="price-item price-item--bordered">
+          <span class="price-num">€79</span>
+          <span class="price-label">{lang === 'de' ? 'Vor Ort / Einsatz' : 'On-site / visit'}</span>
         </div>
-        <div style="padding:1.5rem 0;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-0.04em;">€99</span>
-          <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-left:0.5rem;">{lang === 'de' ? 'Windows 10 → 11' : 'Windows 10 → 11'}</span>
+        <div class="price-item">
+          <span class="price-num">€99</span>
+          <span class="price-label">Windows 10 → 11</span>
         </div>
       </div>
     </div>
   </div>
 
 </section>
+
+<style>
+.price-band-inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+.price-item {
+  padding: 1.5rem 2.5rem 1.5rem 0;
+  margin-right: 2.5rem;
+}
+.price-item--bordered {
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+.price-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.04em;
+}
+.price-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.75);
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .price-band-inner {
+    flex-direction: column;
+    gap: 0;
+  }
+  .price-item {
+    padding: 1rem 0;
+    margin-right: 0;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .price-item:last-child { border-bottom: none; }
+  .price-num { font-size: 1.6rem; }
+  .price-label { display: block; margin-left: 0; margin-top: 0.15rem; font-size: 0.8rem; }
+}
+</style>

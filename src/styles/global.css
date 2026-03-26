@@ -108,3 +108,11 @@
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
 [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .section { padding: 4rem 0; }
+  .container { padding: 0 1.25rem; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+  .result-card { padding: 1.5rem; }
+}
