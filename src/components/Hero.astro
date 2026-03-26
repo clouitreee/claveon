@@ -47,16 +47,6 @@ const steps = lang === 'de' ? [
             {lang === 'de' ? 'Kein Konzernpreis. Kein Minutentakt.' : 'No corporate price. No per-minute billing.'}
           </p>
         </div>
-        <div class="anim-5" style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2.5rem;">
-          {(lang === 'de'
-            ? ['Köln & 15 km Umgebung', 'Antwort in 24h', 'Deutsch · Español · English']
-            : ['Cologne & 15 km area', 'Reply within 24h', 'Deutsch · Español · English']
-          ).map(item => (
-            <span style="font-size:0.85rem;color:var(--subtle);display:flex;align-items:center;gap:0.4rem;">
-              <span style="color:var(--green);font-weight:700;">✓</span> {item}
-            </span>
-          ))}
-        </div>
       </div>
 
       <!-- Right: how it works steps -->
@@ -73,11 +63,6 @@ const steps = lang === 'de' ? [
             </div>
           </div>
         ))}
-        <div style="margin-top:2.5rem;">
-          <a href="#kontakt" class="btn-primary" style="font-size:0.95rem;">
-            {lang === 'de' ? 'Jetzt anfragen →' : 'Get in touch →'}
-          </a>
-        </div>
       </div>
 
     </div>
