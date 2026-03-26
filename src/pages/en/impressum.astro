@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NavBar from '../../components/NavBar.astro';
+import Footer from '../../components/Footer.astro';
+---
+<Layout title="Legal Notice | ClaveON" description="Legal Notice ClaveON" lang="en" canonicalPath="/en/impressum">
+  <NavBar lang="en" />
+  <main class="section">
+    <div class="container" style="max-width: 680px;">
+      <h1 class="text-3xl font-bold mb-8">Legal Notice</h1>
+      <div class="space-y-4 text-base leading-relaxed" style="color: var(--muted);">
+        <div>
+          <p class="font-semibold" style="color: var(--text);">Information according to § 5 TMG</p>
+          <p>Martin Lache<br />Liebigstraße 7<br />50823 Cologne, Germany</p>
+        </div>
+        <div>
+          <p class="font-semibold" style="color: var(--text);">Contact</p>
+          <p>Email: <a href="mailto:info@claveon.de" style="color: var(--blue);">info@claveon.de</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer lang="en" />
+</Layout>

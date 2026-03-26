@@ -1,0 +1,72 @@
+---
+interface Props { lang?: string; }
+const { lang = 'de' } = Astro.props;
+---
+<section class="section" id="ueber-martin" data-reveal>
+  <div class="container">
+    <div class="grid md:grid-cols-12 gap-10 items-start">
+
+      <div class="md:col-span-3">
+        <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--muted);">
+          {lang === 'de' ? '03 · Über mich' : '03 · About me'}
+        </span>
+      </div>
+
+      <div class="md:col-span-9">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+
+          <!-- Photo -->
+          <div>
+            <img
+              src="/assets/martin.jpg"
+              alt="Martin — ClaveON"
+              class="rounded-2xl w-full max-w-xs"
+              style="aspect-ratio: 4/5; object-fit: cover; object-position: top;"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Text -->
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-5">Martin.</h2>
+            {lang === 'de' ? (
+              <div class="space-y-4 text-base leading-relaxed" style="color: var(--muted);">
+                <p>
+                  Geboren in Kuba, seit 2019 in Köln zuhause.
+                  Technik fasziniert mich — aber was mir wirklich Spaß macht
+                  ist, wenn am Ende alles läuft und Sie entspannt sind.
+                </p>
+                <p>
+                  Kein Callcenter, kein Konzern.
+                  Ich komme persönlich zu Ihnen, erkläre was ich tue,
+                  und gehe erst wenn das Problem gelöst ist.
+                </p>
+                <p class="font-medium" style="color: var(--text);">
+                  Deutsch · Español · English
+                </p>
+              </div>
+            ) : (
+              <div class="space-y-4 text-base leading-relaxed" style="color: var(--muted);">
+                <p>
+                  Born in Cuba, living in Cologne since 2019.
+                  I love technology — but what I really enjoy is seeing you
+                  relaxed when everything finally works.
+                </p>
+                <p>
+                  No call center, no corporation.
+                  I show up personally, explain what I do,
+                  and don't leave until the problem is solved.
+                </p>
+                <p class="font-medium" style="color: var(--text);">
+                  Deutsch · Español · English
+                </p>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>

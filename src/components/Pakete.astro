@@ -1,0 +1,99 @@
+---
+interface Props { lang?: string; }
+const { lang = 'de' } = Astro.props;
+
+const t = {
+  de: {
+    label: '02 · Preise',
+    headline: 'Klare Preise. Keine Überraschungen.',
+    sub: 'Kein Minutentakt nach der ersten Stunde. Was ich sage, kostet das.',
+    packages: [
+      { id: 'fernwartung', name: 'Fernwartung', price: '€25', unit: '/ 30 Min', desc: 'Schnelle Hilfe per Bildschirmübertragung. E-Mail, Passwort, App, Einstellung — von zuhause aus gelöst.', tag: 'Einstieg' },
+      { id: 'schnell', name: 'Schnell-Hilfe', price: '€49', unit: '/ Einsatz', desc: 'Ein konkretes Problem vor Ort. Drucker, WLAN, TV, App — ich komme, ich löse es, fertig.', tag: '' },
+      { id: 'neustart', name: 'Neustart-Paket', price: '€79', unit: '/ Einsatz', desc: 'Neues Gerät einrichten, Daten übertragen, WLAN verbinden und Windows 11 erklären.', tag: 'Beliebt' },
+      { id: 'migration', name: 'Windows 10 Migration', price: '€89', unit: '/ Einsatz', desc: 'Upgrade-Beratung, Einrichtung Windows 11 oder neues Gerät, komplette Datenmigration.', tag: 'Aktuell' },
+    ],
+    fallback: 'Alles andere: €59/h — transparent, kein Minutentakt.',
+  },
+  en: {
+    label: '02 · Pricing',
+    headline: 'Clear prices. No surprises.',
+    sub: 'No per-minute billing after the first hour. What I say, it costs that.',
+    packages: [
+      { id: 'fernwartung', name: 'Remote Support', price: '€25', unit: '/ 30 min', desc: 'Quick help via screen sharing. Email, password, app, settings — solved from home.', tag: 'Entry' },
+      { id: 'schnell', name: 'Quick Help', price: '€49', unit: '/ visit', desc: 'One specific problem on-site. Printer, WiFi, TV, app — I come, I fix it, done.', tag: '' },
+      { id: 'neustart', name: 'Fresh Start Package', price: '€79', unit: '/ visit', desc: 'Set up new device, transfer data, connect WiFi and explain Windows 11.', tag: 'Popular' },
+      { id: 'migration', name: 'Windows 10 Migration', price: '€89', unit: '/ visit', desc: 'Upgrade advice, Windows 11 setup or new device, complete data migration.', tag: 'Current' },
+    ],
+    fallback: 'Everything else: €59/h — transparent, no per-minute billing.',
+  }
+};
+const c = t[lang as keyof typeof t] ?? t.de;
+---
+<section class="section" id="preise" data-reveal>
+  <div class="container">
+    <div class="grid md:grid-cols-12 gap-10 items-start">
+
+      <div class="md:col-span-3">
+        <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--muted);">{c.label}</span>
+      </div>
+
+      <div class="md:col-span-9">
+        <h2 class="text-3xl md:text-4xl font-bold mb-3">{c.headline}</h2>
+        <p class="text-base mb-8" style="color: var(--muted);">{c.sub}</p>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          {c.packages.map((pkg) => (
+            <div
+              class="border rounded-xl p-6 relative cursor-pointer transition-all hover:border-blue-500 pkg-card"
+              data-pkg={pkg.id}
+              style="border-color: var(--border);"
+            >
+              {pkg.tag && (
+                <span class="absolute top-4 right-4 text-xs font-semibold px-2 py-0.5 rounded-full"
+                  style={pkg.tag === 'Beliebt' || pkg.tag === 'Popular'
+                    ? 'background: #DBEAFE; color: #1D4ED8;'
+                    : pkg.tag === 'Einstieg' || pkg.tag === 'Entry'
+                    ? 'background: #DCFCE7; color: #15803D;'
+                    : 'background: #FEF3C7; color: #B45309;'}>
+                  {pkg.tag}
+                </span>
+              )}
+              <div class="mb-3">
+                <span class="text-2xl font-bold" style="color: var(--text);">{pkg.price}</span>
+                <span class="text-sm ml-1" style="color: var(--muted);">{pkg.unit}</span>
+              </div>
+              <h3 class="font-semibold text-base mb-2">{pkg.name}</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--muted);">{pkg.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-sm font-mono" style="color: var(--muted);">
+          <span style="color: var(--blue);">→</span> {c.fallback}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<script>
+  document.querySelectorAll('.pkg-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.pkg-card').forEach(c => {
+        (c as HTMLElement).style.borderColor = 'var(--border)';
+        (c as HTMLElement).style.background = '';
+      });
+      (card as HTMLElement).style.borderColor = '#2563EB';
+      (card as HTMLElement).style.background = '#EFF6FF';
+      const pkg = (card as HTMLElement).dataset.pkg;
+      const kontakt = document.getElementById('kontakt');
+      if (kontakt) {
+        const select = kontakt.querySelector('[name="paket"]') as HTMLSelectElement;
+        if (select) select.value = pkg ?? '';
+        kontakt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>

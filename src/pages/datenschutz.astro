@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Datenschutz | ClaveON" description="Datenschutzerklärung ClaveON" lang="de" canonicalPath="/datenschutz">
+  <NavBar lang="de" />
+  <main class="section">
+    <div class="container" style="max-width: 680px;">
+      <h1 class="text-3xl font-bold mb-8">Datenschutzerklärung</h1>
+      <div class="space-y-6 text-base leading-relaxed" style="color: var(--muted);">
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Verantwortlich</p>
+          <p>Martin Lache · Liebigstraße 7 · 50823 Köln · E-Mail: info@claveon.de</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Erhobene Daten</p>
+          <p>Wir speichern keine personenbezogenen Daten außer denjenigen, die Sie uns freiwillig über das Kontaktformular senden (Name, E-Mail, Nachricht). Diese werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Kontaktformular</p>
+          <p>Nachrichten aus dem Kontaktformular werden über den Dienst Resend (resend.com) verarbeitet und per E-Mail zugestellt. Keine dauerhafte Speicherung.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Hosting</p>
+          <p>Diese Website wird über Cloudflare Pages bereitgestellt. Dabei können technische Zugriffsdaten (z.B. IP-Adresse) verarbeitet werden.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Cookies & Tracking</p>
+          <p>Keine Tracking-Cookies. Keine Analyse-Tools. Keine Datenweitergabe an Dritte.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Ihre Rechte</p>
+          <p>Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung gemäß DSGVO. Kontakt: <a href="mailto:info@claveon.de" style="color: var(--blue);">info@claveon.de</a></p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Beschwerderecht</p>
+          <p>Sie haben das Recht, sich bei der <a href="https://www.ldi.nrw.de/" target="_blank" rel="noopener" style="color: var(--blue);">Landesbeauftragten für Datenschutz und Informationsfreiheit NRW</a> zu beschweren.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer lang="de" />
+</Layout>

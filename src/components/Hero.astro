@@ -1,0 +1,75 @@
+---
+interface Props { lang?: string; }
+const { lang = 'de' } = Astro.props;
+const t = {
+  de: {
+    headline: 'Technik-Probleme?',
+    sub: 'Ich helfe — ab €25 Fernwartung oder vor Ort in Köln.',
+    cta: 'Jetzt Kontakt aufnehmen',
+    note: 'Kein Minutentakt. Kein MediaMarkt-Preis.',
+    badge: 'Fernwartung ab €25 · Vor Ort ab €49',
+  },
+  en: {
+    headline: 'Tech problems?',
+    sub: 'I help — from €25 remote or on-site in Cologne.',
+    cta: 'Get in touch',
+    note: 'No per-minute billing. No MediaMarkt price.',
+    badge: 'Remote from €25 · On-site from €49',
+  }
+};
+const c = t[lang as keyof typeof t] ?? t.de;
+---
+<section class="section" style="padding-top: 4rem; padding-bottom: 4rem;">
+  <div class="container">
+    <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+
+      <!-- Left: copy -->
+      <div class="md:col-span-7">
+        <div class="inline-flex items-center gap-2 text-xs font-mono tracking-wider uppercase mb-5 px-3 py-1.5 rounded-full border" style="color: var(--blue); border-color: #BFDBFE; background: #EFF6FF;">
+          {c.badge}
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-4" style="color: var(--text);">
+          {c.headline}
+        </h1>
+        <p class="text-xl md:text-2xl mb-8" style="color: var(--muted);">
+          {c.sub}
+        </p>
+
+        <a href="#kontakt" class="btn-primary text-lg">
+          {c.cta} →
+        </a>
+
+        <p class="mt-5 text-sm font-mono" style="color: var(--muted);">
+          {c.note}
+        </p>
+      </div>
+
+      <!-- Right: tagline block -->
+      <div class="md:col-span-5 hidden md:block">
+        <div class="border rounded-xl p-8" style="border-color: var(--border);">
+          <p class="text-3xl font-bold leading-snug" style="color: var(--text);">
+            {lang === 'de'
+              ? 'Ihr Gerät funktioniert nicht. Ich schon.'
+              : "Your device doesn't work. I do."}
+          </p>
+          <div class="mt-6 space-y-2">
+            {['PC · Mac · WLAN · Router',
+              'iPhone · Android · Tablet',
+              'Smart TV · Drucker · Kaffeevollautomat',
+              'Saugroboter · Alexa · Smart Home',
+              'Passwörter · E-Mail · Backups',
+              lang === 'de' ? 'Alles, was Strom hat.' : 'Everything that needs power.'].map(line => (
+              <div class="flex items-center gap-2 text-sm" style="color: var(--muted);">
+                <span style="color: var(--blue);">·</span>
+                {line}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="divider"></div>

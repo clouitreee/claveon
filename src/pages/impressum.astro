@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Impressum | ClaveON" description="Impressum ClaveON" lang="de" canonicalPath="/impressum">
+  <NavBar lang="de" />
+  <main class="section">
+    <div class="container" style="max-width: 680px;">
+      <h1 class="text-3xl font-bold mb-8">Impressum</h1>
+      <div class="space-y-4 text-base leading-relaxed" style="color: var(--muted);">
+        <div>
+          <p class="font-semibold" style="color: var(--text);">Angaben gemäß § 5 TMG</p>
+          <p>Martin Lache<br />Liebigstraße 7<br />50823 Köln</p>
+        </div>
+        <div>
+          <p class="font-semibold" style="color: var(--text);">Kontakt</p>
+          <p>E-Mail: <a href="mailto:info@claveon.de" style="color: var(--blue);">info@claveon.de</a></p>
+        </div>
+        <div>
+          <p class="font-semibold" style="color: var(--text);">Hinweis</p>
+          <p>Dies ist ein Einzelunternehmen ohne eingetragenen Gewerbebetrieb. Angaben in reduzierter Form gemäß geltendem Recht.</p>
+        </div>
+        <div>
+          <p class="font-semibold" style="color: var(--text);">Streitschlichtung</p>
+          <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" style="color: var(--blue);">ec.europa.eu/consumers/odr</a>. Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer lang="de" />
+</Layout>

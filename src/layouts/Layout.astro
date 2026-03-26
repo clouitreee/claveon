@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  canonicalPath?: string;
+}
+
+const { title, description, lang = 'de', canonicalPath = '/' } = Astro.props;
+const canonical = `https://claveon.de${canonicalPath}`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ClaveON" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#2563EB" />
+    <link rel="icon" href="/favicon.ico" />
+
+    {lang === 'de' && <link rel="alternate" hreflang="en" href="https://claveon.de/en/" />}
+    {lang === 'en' && <link rel="alternate" hreflang="de" href="https://claveon.de/" />}
+    <link rel="alternate" hreflang="x-default" href="https://claveon.de/" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
