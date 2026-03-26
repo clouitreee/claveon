@@ -2,18 +2,14 @@
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 
-const services = lang === 'de' ? [
-  { icon: '💻', label: 'PC / Laptop', price: '€29', note: 'Fernwartung' },
-  { icon: '📱', label: 'Handy / Tablet', price: '€79', note: 'Vor Ort' },
-  { icon: '📡', label: 'WLAN / Router', price: '€29', note: 'Fernwartung' },
-  { icon: '📺', label: 'TV / Drucker', price: '€79', note: 'Vor Ort' },
-  { icon: '☕', label: 'Haushaltsgeräte', price: '€79', note: 'Vor Ort' },
+const steps = lang === 'de' ? [
+  { n: '01', title: 'Anfragen', sub: 'Schreiben Sie uns — Antwort in 24 Stunden.' },
+  { n: '02', title: 'Termin oder Fernverbindung', sub: 'Wir kommen zu Ihnen oder verbinden uns per Bildschirm.' },
+  { n: '03', title: 'Problem gelöst', sub: 'Wir erklären was wir getan haben. Fertig.' },
 ] : [
-  { icon: '💻', label: 'PC / Laptop', price: '€29', note: 'Remote' },
-  { icon: '📱', label: 'Phone / Tablet', price: '€79', note: 'On-site' },
-  { icon: '📡', label: 'WiFi / Router', price: '€29', note: 'Remote' },
-  { icon: '📺', label: 'TV / Printer', price: '€79', note: 'On-site' },
-  { icon: '☕', label: 'Appliances', price: '€79', note: 'On-site' },
+  { n: '01', title: 'Get in touch', sub: 'Write to us — reply within 24 hours.' },
+  { n: '02', title: 'Appointment or remote', sub: 'We come to you or connect via screen sharing.' },
+  { n: '03', title: 'Problem solved', sub: "We explain what we did. Done." },
 ];
 ---
 
@@ -63,28 +59,23 @@ const services = lang === 'de' ? [
         </div>
       </div>
 
-      <!-- Right: service cards panel -->
-      <div class="anim-3" style="background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;overflow:hidden;">
-        <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);background:var(--terra);">
-          <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin:0;">
-            {lang === 'de' ? 'Was wir reparieren' : 'What we fix'}
-          </p>
-        </div>
-        {services.map((s, i) => (
-          <div style={`display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:${i < services.length - 1 ? '1px solid var(--border)' : 'none'};`}>
-            <div style="display:flex;align-items:center;gap:0.875rem;">
-              <span style="font-size:1.1rem;">{s.icon}</span>
-              <span style="font-size:0.95rem;font-weight:500;">{s.label}</span>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:700;color:var(--terra);">{s.price}</span>
-              <span style="font-size:0.75rem;color:var(--subtle);display:block;font-family:'IBM Plex Mono',monospace;">{s.note}</span>
+      <!-- Right: how it works steps -->
+      <div class="anim-3" style="display:flex;flex-direction:column;gap:0;">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;">
+          {lang === 'de' ? '— So läuft es ab' : '— How it works'}
+        </p>
+        {steps.map((s, i) => (
+          <div style={`display:flex;gap:1.5rem;align-items:flex-start;padding-bottom:${i < steps.length - 1 ? '2rem' : '0'};${i < steps.length - 1 ? 'border-bottom:1px solid var(--border);margin-bottom:2rem;' : ''}`}>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:2.5rem;font-weight:700;color:var(--terra);letter-spacing:-0.04em;line-height:1;flex-shrink:0;">{s.n}</span>
+            <div>
+              <p style="font-size:1.1rem;font-weight:700;margin:0 0 0.35rem;color:var(--text);">{s.title}</p>
+              <p style="font-size:0.9rem;color:var(--muted);margin:0;line-height:1.6;">{s.sub}</p>
             </div>
           </div>
         ))}
-        <div style="padding:1rem 1.5rem;background:var(--bg);">
-          <a href="#leistungen" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--terra);text-decoration:none;">
-            {lang === 'de' ? 'Alle Leistungen ansehen →' : 'View all services →'}
+        <div style="margin-top:2.5rem;">
+          <a href="#kontakt" class="btn-primary" style="font-size:0.95rem;">
+            {lang === 'de' ? 'Jetzt anfragen →' : 'Get in touch →'}
           </a>
         </div>
       </div>
