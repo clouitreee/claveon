@@ -10,32 +10,48 @@ import Footer from '../components/Footer.astro';
       <h1 class="text-3xl font-bold mb-8">Datenschutzerklärung</h1>
       <div class="space-y-6 text-base leading-relaxed" style="color: var(--muted);">
         <div>
-          <p class="font-semibold mb-1" style="color: var(--text);">Verantwortlich</p>
+          <p class="font-semibold mb-1" style="color: var(--text);">Verantwortlicher</p>
           <p>Martin Lache · Liebigstraße 7 · 50823 Köln · E-Mail: info@claveon.de</p>
+          <p style="margin-top:0.5rem;">Kein Datenschutzbeauftragter nach Art. 37 DSGVO bestellt (Kleinstunternehmen, keine systematische Verarbeitung besonderer Kategorien).</p>
         </div>
         <div>
-          <p class="font-semibold mb-1" style="color: var(--text);">Erhobene Daten</p>
-          <p>Wir speichern keine personenbezogenen Daten außer denjenigen, die Sie uns freiwillig über das Kontaktformular senden (Name, E-Mail, Nachricht). Diese werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.</p>
+          <p class="font-semibold mb-1" style="color: var(--text);">Erhobene Daten &amp; Rechtsgrundlage</p>
+          <p>Wir speichern keine personenbezogenen Daten außer denjenigen, die Sie uns freiwillig über das Kontaktformular senden (Name, E-Mail-Adresse, optional Telefon, Nachricht). Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) für die Bearbeitung Ihrer Anfrage.</p>
         </div>
         <div>
-          <p class="font-semibold mb-1" style="color: var(--text);">Kontaktformular</p>
-          <p>Nachrichten aus dem Kontaktformular werden über den Dienst Resend (resend.com) verarbeitet und per E-Mail zugestellt. Keine dauerhafte Speicherung.</p>
+          <p class="font-semibold mb-1" style="color: var(--text);">Kontaktformular &amp; E-Mail-Versand (Auftragsverarbeiter)</p>
+          <p>Nachrichten aus dem Kontaktformular werden über <strong>Resend, Inc.</strong> (340 Pine Street, Suite 800, San Francisco, CA 94104, USA; <a href="https://resend.com/privacy" target="_blank" rel="noopener" style="color: var(--terra);">resend.com/privacy</a>) als Auftragsverarbeiter gemäß Art. 28 DSGVO übermittelt und per E-Mail zugestellt. Mit Resend besteht ein Data Processing Agreement (DPA). Die Daten werden nicht dauerhaft auf Resend-Servern gespeichert — sie dienen ausschließlich der E-Mail-Zustellung. Übermittlung in die USA erfolgt auf Basis der EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO).</p>
         </div>
         <div>
           <p class="font-semibold mb-1" style="color: var(--text);">Hosting</p>
-          <p>Diese Website wird über Cloudflare Pages bereitgestellt. Dabei können technische Zugriffsdaten (z.B. IP-Adresse) verarbeitet werden.</p>
+          <p>Diese Website wird über <strong>Cloudflare Pages</strong> (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA) bereitgestellt. Dabei können technische Zugriffsdaten (z.B. IP-Adresse, Zeitstempel) vorübergehend verarbeitet werden. Cloudflare ist ebenfalls Auftragsverarbeiter gemäß Art. 28 DSGVO.</p>
         </div>
         <div>
-          <p class="font-semibold mb-1" style="color: var(--text);">Cookies & Tracking</p>
-          <p>Keine Tracking-Cookies. Keine Analyse-Tools. Keine Datenweitergabe an Dritte.</p>
+          <p class="font-semibold mb-1" style="color: var(--text);">Service Worker &amp; Offline-Cache</p>
+          <p>Diese Website verwendet einen Service Worker (sw.js) für PWA-Funktionalität. Dabei werden statische Ressourcen (CSS, Schriftarten, Bilder) lokal in Ihrem Browser gecacht, um die Seite auch bei schlechter Internetverbindung anzuzeigen. Es werden keine personenbezogenen Daten gecacht. Der Cache wird bei einem Update der Website automatisch erneuert.</p>
         </div>
         <div>
-          <p class="font-semibold mb-1" style="color: var(--text);">Ihre Rechte</p>
-          <p>Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung gemäß DSGVO. Kontakt: <a href="mailto:info@claveon.de" style="color: var(--blue);">info@claveon.de</a></p>
+          <p class="font-semibold mb-1" style="color: var(--text);">Cookies &amp; Tracking</p>
+          <p>Keine Tracking-Cookies. Keine Analyse-Tools (kein Google Analytics, kein Matomo). Keine Datenweitergabe an Dritte zu Werbezwecken.</p>
         </div>
         <div>
-          <p class="font-semibold mb-1" style="color: var(--text);">Beschwerderecht</p>
-          <p>Sie haben das Recht, sich bei der <a href="https://www.ldi.nrw.de/" target="_blank" rel="noopener" style="color: var(--blue);">Landesbeauftragten für Datenschutz und Informationsfreiheit NRW</a> zu beschweren.</p>
+          <p class="font-semibold mb-1" style="color: var(--text);">Ihre Rechte (Art. 15–21 DSGVO)</p>
+          <ul style="list-style: disc; padding-left: 1.25rem; margin-top: 0.5rem; display: grid; gap: 0.3rem;">
+            <li><strong>Auskunft</strong> (Art. 15): Welche Daten wir über Sie speichern.</li>
+            <li><strong>Berichtigung</strong> (Art. 16): Korrektur unrichtiger Daten.</li>
+            <li><strong>Löschung</strong> (Art. 17): Löschung Ihrer Daten.</li>
+            <li><strong>Einschränkung</strong> (Art. 18): Einschränkung der Verarbeitung.</li>
+            <li><strong>Datenübertragbarkeit</strong> (Art. 20): Herausgabe Ihrer Daten in maschinenlesbarem Format.</li>
+            <li><strong>Widerspruch</strong> (Art. 21): Widerspruch gegen die Verarbeitung Ihrer Daten.</li>
+          </ul>
+          <p style="margin-top: 0.75rem;">Anfragen richten Sie bitte an: <a href="mailto:info@claveon.de" style="color: var(--terra);">info@claveon.de</a></p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color: var(--text);">Beschwerderecht bei der Aufsichtsbehörde</p>
+          <p>Sie haben das Recht, sich bei der zuständigen Datenschutzbehörde zu beschweren: <a href="https://www.ldi.nrw.de/" target="_blank" rel="noopener" style="color: var(--terra);">Landesbeauftragte für Datenschutz und Informationsfreiheit NRW (LDI NRW)</a>, Kavalleriestraße 2–4, 40213 Düsseldorf.</p>
+        </div>
+        <div>
+          <p style="font-size: 0.85rem;">Stand: März 2026</p>
         </div>
       </div>
     </div>
