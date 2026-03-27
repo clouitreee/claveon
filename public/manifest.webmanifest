@@ -1,0 +1,65 @@
+{
+  "name": "ClaveON Technikhilfe Köln",
+  "short_name": "ClaveON",
+  "description": "PC-Hilfe, WLAN & Smartphone-Hilfe in Köln. Fernwartung ab €29, Vor-Ort ab €79. Kein Konzernpreis.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#C1440E",
+  "background_color": "#ffffff",
+  "lang": "de",
+  "dir": "ltr",
+  "categories": ["business", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jetzt anfragen",
+      "short_name": "Anfragen",
+      "description": "Direkt Kontakt aufnehmen",
+      "url": "/#kontakt",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Preise ansehen",
+      "short_name": "Preise",
+      "description": "Transparente Preisübersicht",
+      "url": "/#assistent",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/martin.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "ClaveON — Technikhilfe Köln"
+    }
+  ]
+}

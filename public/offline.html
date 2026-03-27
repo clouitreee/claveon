@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keine Verbindung | ClaveON</title>
+  <meta name="theme-color" content="#C1440E" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      background: #ffffff;
+      color: #111;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .icon {
+      width: 80px; height: 80px;
+      background: #C1440E;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+      font-family: 'Courier New', monospace;
+      font-weight: 900;
+      font-size: 28px;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+    h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 1rem; font-weight: 700; }
+    p { color: #666; font-size: 1rem; max-width: 34ch; line-height: 1.6; margin-bottom: 2rem; }
+    .contact {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      width: 100%; max-width: 300px;
+    }
+    a {
+      display: block; padding: 0.875rem 1.5rem;
+      border-radius: 4px; text-decoration: none;
+      font-weight: 600; font-size: 0.95rem;
+      transition: opacity 0.15s;
+    }
+    a:hover { opacity: 0.85; }
+    .btn-primary { background: #C1440E; color: #fff; }
+    .btn-outline { border: 2px solid #C1440E; color: #C1440E; }
+    .retry { margin-top: 2rem; font-size: 0.85rem; color: #999; cursor: pointer; text-decoration: underline; background: none; border: none; }
+  </style>
+</head>
+<body>
+  <div class="icon">ON</div>
+  <h1>Keine Verbindung</h1>
+  <p>Momentan sind Sie offline. Rufen Sie uns direkt an oder schreiben Sie uns per WhatsApp.</p>
+  <div class="contact">
+    <a href="tel:+4915565029989" class="btn-primary">📞 Jetzt anrufen</a>
+    <a href="https://wa.me/4915565029989" class="btn-outline">💬 WhatsApp</a>
+  </div>
+  <button class="retry" onclick="window.location.reload()">↺ Erneut versuchen</button>
+</body>
+</html>

@@ -29,8 +29,24 @@ const canonical = `https://claveon.de${canonicalPath}`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://claveon.de/assets/martin.jpg" />
     <meta name="theme-color" content="#C1440E" />
+
+    <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/favicon-180.svg" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ClaveON" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <!-- Android / MS -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileColor" content="#C1440E" />
+    <meta name="msapplication-TileImage" content="/icons/icon-192.png" />
+
     {lang === 'de' && <link rel="alternate" hreflang="en" href="https://claveon.de/en/" />}
     {lang === 'en' && <link rel="alternate" hreflang="de" href="https://claveon.de/" />}
     <link rel="alternate" hreflang="x-default" href="https://claveon.de/" />
@@ -56,6 +72,7 @@ const canonical = `https://claveon.de${canonicalPath}`;
     </style>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        // Scroll reveal
         const observer = new IntersectionObserver(
           (entries) => entries.forEach(e => {
             if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
@@ -63,6 +80,12 @@ const canonical = `https://claveon.de${canonicalPath}`;
           { threshold: 0.08 }
         );
         document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .catch(err => console.warn('SW registration failed:', err));
+        }
       });
     </script>
   </body>
