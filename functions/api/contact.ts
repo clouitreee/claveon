@@ -1,4 +1,43 @@
-interface Env { BREVO_API_KEY: string; }
+interface Env { BREVO_API_KEY: string; SIMPLELOGIN_API_KEY?: string; }
+
+type SLAlias = { id: number; email: string };
+type SLContact = { reverse_alias_address?: string };
+
+async function getSimpleLoginReverseAlias(
+  apiKey: string,
+  clientName: string,
+  clientEmail: string
+): Promise<string | null> {
+  try {
+    const aliasRes = await fetch(
+      'https://app.simplelogin.io/api/v2/aliases?page_id=0&query=info%40claveon.de',
+      { headers: { 'Authentication': apiKey } }
+    );
+    if (!aliasRes.ok) return null;
+
+    const { aliases } = await aliasRes.json() as { aliases: SLAlias[] };
+    const alias = aliases.find(a => a.email === 'info@claveon.de');
+    if (!alias) return null;
+
+    const contactRes = await fetch(
+      `https://app.simplelogin.io/api/aliases/${alias.id}/contacts`,
+      {
+        method: 'POST',
+        headers: {
+          'Authentication': apiKey,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ contact: `${clientName} <${clientEmail}>` }),
+      }
+    );
+    if (!contactRes.ok) return null;
+
+    const contact = await contactRes.json() as SLContact;
+    return contact.reverse_alias_address ?? null;
+  } catch {
+    return null;
+  }
+}
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
@@ -37,6 +76,13 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const phoneLine = safePhone ? `\nTelefon: ${safePhone}` : '';
   const paketLine = paket     ? `\nPaket: ${paket}`       : '';
 
+  // Get SimpleLogin reverse alias so replies go FROM info@claveon.de
+  const reverseAlias = env.SIMPLELOGIN_API_KEY
+    ? await getSimpleLoginReverseAlias(env.SIMPLELOGIN_API_KEY, safeName, safeEmail)
+    : null;
+
+  const replyEmail = reverseAlias ?? safeEmail;
+
   const textBody = `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`;
 
   const paketLabel: Record<string, string> = {
@@ -66,14 +112,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:32px 16px;">
     <tr><td align="center">
       <table width="100%" style="max-width:560px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-        <!-- Header -->
         <tr>
           <td style="background:#C1440E;padding:24px 32px;">
             <span style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">ClaveON</span>
             <span style="font-size:13px;color:rgba(255,255,255,0.75);margin-left:12px;">Neue Anfrage</span>
           </td>
         </tr>
-        <!-- Body -->
         <tr>
           <td style="padding:32px;">
             <p style="margin:0 0 24px;font-size:22px;font-weight:700;color:#111827;">
@@ -87,21 +131,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
               ${phoneRow}
               ${paketRow}
             </table>
-            <!-- Message -->
             <div style="margin-top:24px;padding:20px;background:#f9fafb;border-left:3px solid #C1440E;border-radius:0 6px 6px 0;">
               <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Nachricht</p>
               <p style="margin:0;font-size:15px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
-            <!-- CTA -->
             <div style="margin-top:28px;text-align:center;">
-              <a href="mailto:${safeEmail}?subject=Re: Ihre Anfrage bei ClaveON"
+              <a href="mailto:${replyEmail}?subject=Re: Ihre Anfrage bei ClaveON"
                  style="display:inline-block;background:#C1440E;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:15px;font-weight:600;">
                 Antworten an ${safeName}
               </a>
             </div>
           </td>
         </tr>
-        <!-- Footer -->
         <tr>
           <td style="padding:16px 32px;background:#f9fafb;border-top:1px solid #e5e7eb;text-align:center;">
             <p style="margin:0;font-size:12px;color:#9ca3af;">claveon.de · info@claveon.de</p>
@@ -123,7 +164,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     body: JSON.stringify({
       sender: { name: 'Kontaktformular claveon.de', email: 'noreply@claveon.de' },
       to: [{ email: 'info@claveon.de', name: 'ClaveON' }],
-      replyTo: { email: safeEmail, name: safeName },
+      replyTo: { email: replyEmail, name: safeName },
       subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
       htmlContent: htmlBody,
       textContent: textBody,
