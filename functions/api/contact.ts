@@ -9,11 +9,33 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   catch { return new Response(JSON.stringify({ error: 'Ungültige Anfrage' }), { status: 400, headers }); }
 
   const { name, email, phone, paket, message } = body;
+
   if (!name || !email || !message)
     return new Response(JSON.stringify({ error: 'Fehlende Felder' }), { status: 400, headers });
 
-  const phoneLine = phone ? `\nTelefon: ${phone}` : '';
-  const paketLine = paket ? `\nPaket: ${paket}` : '';
+  if (typeof name !== 'string' || name.trim().length < 2 || name.length > 100)
+    return new Response(JSON.stringify({ error: 'Name ungültig (2–100 Zeichen)' }), { status: 400, headers });
+
+  if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254)
+    return new Response(JSON.stringify({ error: 'E-Mail ungültig' }), { status: 400, headers });
+
+  if (phone && (typeof phone !== 'string' || phone.length > 30))
+    return new Response(JSON.stringify({ error: 'Telefon ungültig' }), { status: 400, headers });
+
+  const validPakete = ['', 'remote', 'onsite', 'neustart', 'migration', 'other'];
+  if (paket && !validPakete.includes(paket))
+    return new Response(JSON.stringify({ error: 'Paket ungültig' }), { status: 400, headers });
+
+  if (typeof message !== 'string' || message.trim().length < 10 || message.length > 2000)
+    return new Response(JSON.stringify({ error: 'Nachricht: 10–2000 Zeichen' }), { status: 400, headers });
+
+  const safeName    = name.trim().slice(0, 100);
+  const safeEmail   = email.trim().slice(0, 254);
+  const safePhone   = phone ? phone.trim().slice(0, 30) : '';
+  const safeMessage = message.trim().slice(0, 2000);
+
+  const phoneLine = safePhone ? `\nTelefon: ${safePhone}` : '';
+  const paketLine = paket     ? `\nPaket: ${paket}`       : '';
 
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -24,9 +46,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     body: JSON.stringify({
       from: 'Kontaktformular claveon.de <noreply@send.claveon.de>',
       to: ['info@claveon.de'],
-      reply_to: email,
-      subject: `Neue Anfrage von ${name}${paket ? ` – ${paket}` : ''}`,
-      text: `Name: ${name}\nE-Mail: ${email}${phoneLine}${paketLine}\n\nNachricht:\n${message}`,
+      reply_to: safeEmail,
+      subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
+      text: `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`,
     }),
   });
 
