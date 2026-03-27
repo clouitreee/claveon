@@ -24,6 +24,10 @@ const t = {
     submit: 'Nachricht senden', sending: 'Wird gesendet…',
     success: '✓ Nachricht gesendet. Wir melden uns bald.',
     error: 'Fehler beim Senden. Bitte direkt an info@claveon.de schreiben.',
+    consentLabel: 'Ich akzeptiere die',
+    consentLink: 'Datenschutzerklärung',
+    consentSuffix: 'und stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage verwendet werden.',
+    datenschutzHref: '/datenschutz/',
   },
   en: {
     headline: 'Write to us.',
@@ -47,6 +51,10 @@ const t = {
     submit: 'Send message', sending: 'Sending…',
     success: "✓ Message sent. We'll get back to you soon.",
     error: 'Error sending. Please write directly to info@claveon.de.',
+    consentLabel: 'I accept the',
+    consentLink: 'Privacy Policy',
+    consentSuffix: 'and agree that my data will be used to process my request.',
+    datenschutzHref: '/en/datenschutz/',
   }
 };
 const c = t[lang as keyof typeof t] ?? t.de;
@@ -71,7 +79,12 @@ const c = t[lang as keyof typeof t] ?? t.de;
           <p style="color:var(--muted);font-size:0.95rem;margin-bottom:1.25rem;">{c.werixoText}</p>
           <a href="https://werixo.de" target="_blank" rel="noopener" class="btn-primary">{c.werixoCta}</a>
         </div>
-        <form id="contact-form" style="display:grid;gap:1rem;">
+        <form id="contact-form" style="display:grid;gap:1rem;" autocomplete="on">
+          {/* Honeypot — invisible para humanos, los bots lo rellenan */}
+          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
           <div>
             <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.nameLabel} *</label>
             <input name="name" required type="text" class="field" placeholder="Anna Müller" />
@@ -96,7 +109,15 @@ const c = t[lang as keyof typeof t] ?? t.de;
             <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.msgLabel} *</label>
             <textarea name="message" required rows={4} class="field" style="resize:none;" placeholder={c.msgPlaceholder}></textarea>
           </div>
-          <div id="form-status" style="display:none;font-size:0.9rem;font-weight:500;"></div>
+          <div>
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--muted);cursor:pointer;line-height:1.4;">
+              <input name="consent" type="checkbox" required style="margin-top:0.2rem;accent-color:var(--terra);flex-shrink:0;" />
+              <span>
+                {c.consentLabel}&nbsp;<a href={c.datenschutzHref} target="_blank" rel="noopener" style="color:var(--terra);text-decoration:underline;">{c.consentLink}</a>&nbsp;{c.consentSuffix}
+              </span>
+            </label>
+          </div>
+          <div id="form-status" style="display:none;font-size:0.9rem;font-weight:500;" role="alert" aria-live="polite"></div>
           <button type="submit" id="submit-btn" class="btn-primary" data-submit={c.submit} data-sending={c.sending}>{c.submit}</button>
         </form>
       </div>
@@ -132,7 +153,10 @@ const c = t[lang as keyof typeof t] ?? t.de;
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
     const status = document.getElementById('form-status');
-    const data = Object.fromEntries(new FormData(contactForm));
+    const formData = new FormData(contactForm);
+    // Honeypot check — si tiene valor es un bot
+    if (formData.get('website')) return;
+    const { website: _hp, consent: _c, ...data } = Object.fromEntries(formData);
     btn.disabled = true; btn.textContent = btn.dataset.sending; status.style.display = 'none';
     try {
       const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
