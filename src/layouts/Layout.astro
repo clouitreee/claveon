@@ -52,6 +52,7 @@ const canonical = `https://claveon.de${canonicalPath}`;
     <link rel="alternate" hreflang="x-default" href="https://claveon.de/" />
   </head>
   <body>
+    <a href="#main-content" class="skip-nav">{lang === 'en' ? 'Skip to content' : 'Zum Inhalt springen'}</a>
     <slot />
     <a href="/api/whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp" class="wa-fab">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#fff">
@@ -59,6 +60,19 @@ const canonical = `https://claveon.de${canonicalPath}`;
       </svg>
     </a>
     <style>
+      .skip-nav {
+        position: absolute; top: -100%; left: 1rem;
+        background: var(--terra, #C1440E); color: #fff;
+        padding: 0.6rem 1.2rem; border-radius: 0 0 4px 4px;
+        font-size: 0.875rem; font-weight: 600; text-decoration: none;
+        z-index: 10000; transition: top 0.1s;
+      }
+      .skip-nav:focus { top: 0; outline: 3px solid #fff; outline-offset: 2px; }
+      :focus-visible {
+        outline: 2px solid #C1440E;
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
       .wa-fab {
         position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
         display: flex; align-items: center; justify-content: center;

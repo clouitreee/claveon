@@ -42,8 +42,11 @@ const lang = 'en';
       {"@type":"City","name":"Cologne"},
       {"@type":"City","name":"Hürth"},
       {"@type":"City","name":"Frechen"},
+      {"@type":"City","name":"Pulheim"},
       {"@type":"City","name":"Leverkusen"},
-      {"@type":"City","name":"Bergisch Gladbach"}
+      {"@type":"City","name":"Bergisch Gladbach"},
+      {"@type":"City","name":"Dormagen"},
+      {"@type":"City","name":"Brühl"}
     ],
     "knowsLanguage": ["de","es","en"],
     "openingHoursSpecification": {
@@ -72,11 +75,12 @@ const lang = 'en';
       {"@type":"Question","name":"Who comes to my home to fix my computer in Cologne?","acceptedAnswer":{"@type":"Answer","text":"ClaveON comes to you personally — all Cologne districts (Ehrenfeld, Nippes, Sülz, Lindenthal, Deutz, Mülheim, Rodenkirchen and more) and 15 km surroundings. On-site from €79."}},
       {"@type":"Question","name":"Can you set up my new phone in Cologne?","acceptedAnswer":{"@type":"Answer","text":"We set up your new smartphone, transfer contacts, photos and apps. On-site visit €79, full Fresh Start package (new device + data transfer) €89."}},
       {"@type":"Question","name":"Printer not working – can you fix it?","acceptedAnswer":{"@type":"Answer","text":"Yes, we come to you and reinstall or fix the printer. On-site visit €79, Cologne & 15 km area."}},
-      {"@type":"Question","name":"Windows 10 is ending – how do I switch to Windows 11?","acceptedAnswer":{"@type":"Answer","text":"We handle the full upgrade to Windows 11 or set up a new device — including data migration and explanation for €99."}}
+      {"@type":"Question","name":"Windows 10 is ending – how do I switch to Windows 11?","acceptedAnswer":{"@type":"Answer","text":"We handle the full upgrade to Windows 11 or set up a new device — including data migration and explanation for €99."}},
+      {"@type":"Question","name":"How quickly can someone come to me in Cologne?","acceptedAnswer":{"@type":"Answer","text":"We reply within 24 hours and then arrange an appointment. No call centre — direct communication with the technician."}}
     ]
   })} />
   <NavBar lang={lang} />
-  <main>
+  <main id="main-content">
     <Hero lang={lang} />
     <TrustBar lang={lang} />
     <Services lang={lang} />
