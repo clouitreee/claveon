@@ -1,4 +1,4 @@
-interface Env { RESEND_API_KEY: string; }
+interface Env { BREVO_API_KEY: string; }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
@@ -37,18 +37,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const phoneLine = safePhone ? `\nTelefon: ${safePhone}` : '';
   const paketLine = paket     ? `\nPaket: ${paket}`       : '';
 
-  const res = await fetch('https://api.resend.com/emails', {
+  const textBody = `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`;
+
+  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+      'api-key': env.BREVO_API_KEY,
       'Content-Type': 'application/json',
+      'accept': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Kontaktformular claveon.de <noreply@send.claveon.de>',
-      to: ['info@claveon.de'],
-      reply_to: safeEmail,
+      sender: { name: 'Kontaktformular claveon.de', email: 'noreply@claveon.de' },
+      to: [{ email: 'info@claveon.de', name: 'ClaveON' }],
+      replyTo: { email: safeEmail, name: safeName },
       subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
-      text: `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`,
+      textContent: textBody,
     }),
   });
 
