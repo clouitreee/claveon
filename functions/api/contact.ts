@@ -39,6 +39,80 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   const textBody = `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`;
 
+  const paketLabel: Record<string, string> = {
+    remote: 'Fernwartung · €29 / 30 Min',
+    onsite: 'Vor-Ort Hilfe · €79',
+    neustart: 'Neustart-Paket · €89',
+    migration: 'Windows 10 → 11 · €99',
+    other: 'Sonstiges · €59/h',
+  };
+
+  const paketRow = paket ? `
+    <tr>
+      <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;vertical-align:top;">Paket</td>
+      <td style="padding:8px 0;font-size:14px;font-weight:600;color:#C1440E;">${paketLabel[paket] ?? paket}</td>
+    </tr>` : '';
+
+  const phoneRow = safePhone ? `
+    <tr>
+      <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;">Telefon</td>
+      <td style="padding:8px 0;font-size:14px;">${safePhone}</td>
+    </tr>` : '';
+
+  const htmlBody = `<!DOCTYPE html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f5f4;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:560px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+        <!-- Header -->
+        <tr>
+          <td style="background:#C1440E;padding:24px 32px;">
+            <span style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">ClaveON</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.75);margin-left:12px;">Neue Anfrage</span>
+          </td>
+        </tr>
+        <!-- Body -->
+        <tr>
+          <td style="padding:32px;">
+            <p style="margin:0 0 24px;font-size:22px;font-weight:700;color:#111827;">
+              ${safeName}${paket ? ` <span style="font-size:14px;font-weight:400;color:#C1440E;background:#FDF0EB;padding:3px 10px;border-radius:20px;margin-left:8px;">${paketLabel[paket] ?? paket}</span>` : ''}
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e5e7eb;">
+              <tr>
+                <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;">E-Mail</td>
+                <td style="padding:8px 0;font-size:14px;"><a href="mailto:${safeEmail}" style="color:#C1440E;text-decoration:none;">${safeEmail}</a></td>
+              </tr>
+              ${phoneRow}
+              ${paketRow}
+            </table>
+            <!-- Message -->
+            <div style="margin-top:24px;padding:20px;background:#f9fafb;border-left:3px solid #C1440E;border-radius:0 6px 6px 0;">
+              <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Nachricht</p>
+              <p style="margin:0;font-size:15px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            </div>
+            <!-- CTA -->
+            <div style="margin-top:28px;text-align:center;">
+              <a href="mailto:${safeEmail}?subject=Re: Ihre Anfrage bei ClaveON"
+                 style="display:inline-block;background:#C1440E;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:15px;font-weight:600;">
+                Antworten an ${safeName}
+              </a>
+            </div>
+          </td>
+        </tr>
+        <!-- Footer -->
+        <tr>
+          <td style="padding:16px 32px;background:#f9fafb;border-top:1px solid #e5e7eb;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">claveon.de · info@claveon.de</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
   const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
@@ -51,6 +125,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       to: [{ email: 'info@claveon.de', name: 'ClaveON' }],
       replyTo: { email: safeEmail, name: safeName },
       subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
+      htmlContent: htmlBody,
       textContent: textBody,
     }),
   });
