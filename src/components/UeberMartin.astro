@@ -14,18 +14,18 @@ const { lang = 'de' } = Astro.props;
           {lang === 'de' ? '— Über uns' : '— About us'}
         </p>
         <h2 style="font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:1.5rem;">
-          {lang === 'de' ? 'Kein Callcenter. Kein Konzern.' : 'No call center. No corporation.'}
+          {lang === 'de' ? 'Kein Ticket-System. Ich bin Carlos.' : 'No ticket system. I\'m Carlos.'}
         </h2>
         {lang === 'de' ? (
           <div style="display:grid;gap:1rem;color:var(--muted);font-size:1rem;line-height:1.7;">
-            <p style="margin:0;">Martin repariert seit über 10 Jahren Geräte in Köln — ohne Fachjargon, ohne Callcenter. Nur echte Hilfe.</p>
-            <p style="margin:0;">Er kommt persönlich zu Ihnen, erklärt jeden Schritt verständlich — und geht erst, wenn das Problem gelöst ist.</p>
+            <p style="margin:0;">Hinter ClaveON steckt keine Firma mit Ticket-System. Ich bin Carlos — ich mag Technik, ich mag faire Preise, und ich gehe erst nach Hause, wenn Ihr Gerät wieder läuft.</p>
+            <p style="margin:0;">Klingt simpel. Ist es auch.</p>
             <p style="margin:0;font-weight:600;color:var(--text);">Deutsch · Español · English</p>
           </div>
         ) : (
           <div style="display:grid;gap:1rem;color:var(--muted);font-size:1rem;line-height:1.7;">
-            <p style="margin:0;">Martin has been fixing devices in Cologne for over 10 years — no jargon, no call centre. Just real help.</p>
-            <p style="margin:0;">He comes to you personally, explains every step clearly — and doesn't leave until the problem is solved.</p>
+            <p style="margin:0;">There's no company with a ticket system behind ClaveON. I'm Carlos — I like technology, I believe in fair prices, and I don't go home until your device works again.</p>
+            <p style="margin:0;">Sounds simple. It is.</p>
             <p style="margin:0;font-weight:600;color:var(--text);">Deutsch · Español · English</p>
           </div>
         )}
