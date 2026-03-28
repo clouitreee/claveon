@@ -1,0 +1,101 @@
+---
+import {
+  siApple, siAndroid, siSamsung, siHp, siLenovo, siDell,
+  siEpson, siSony, siAsus, siHuawei, siAvm, siHonor, siGoogle
+} from 'simple-icons';
+
+const brands = [
+  { icon: siApple,   label: 'Apple' },
+  { icon: siSamsung, label: 'Samsung' },
+  { icon: siGoogle,  label: 'Google' },
+  { icon: siHp,      label: 'HP' },
+  { icon: siLenovo,  label: 'Lenovo' },
+  { icon: siAndroid, label: 'Android' },
+  { icon: siDell,    label: 'Dell' },
+  { icon: siAsus,    label: 'ASUS' },
+  { icon: siSony,    label: 'Sony' },
+  { icon: siHuawei,  label: 'Huawei' },
+  { icon: siAvm,     label: 'FRITZ!Box' },
+  { icon: siEpson,   label: 'Epson' },
+  { icon: siHonor,   label: 'Honor' },
+];
+---
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    {[...brands, ...brands].map(({ icon, label }) => (
+      <div class="ticker-item" title={label}>
+        <svg
+          role="img"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label={label}
+          fill="currentColor"
+        >
+          <path d={icon.path} />
+        </svg>
+        <span>{label}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker-wrap {
+    overflow: hidden;
+    padding: 2.5rem 0;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--subtle);
+    transition: color 0.2s;
+    cursor: default;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ticker-item:hover {
+    color: var(--text);
+  }
+
+  .ticker-item svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .ticker-item span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+  }
+</style>
