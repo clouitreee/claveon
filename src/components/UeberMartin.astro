@@ -4,10 +4,10 @@ const { lang = 'de' } = Astro.props;
 ---
 <section class="section" id="ueber-uns" data-reveal style="background:var(--terra-light);">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
-      <div style="max-width:380px;">
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center;">
+      <div style="width:200px;flex-shrink:0;">
         <img src="/assets/martin.jpg" alt="ClaveON Team" loading="lazy"
-          style="width:100%;border-radius:6px;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;" />
+          style="width:100%;border-radius:6px;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;" />
       </div>
       <div>
         <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:1rem;">
@@ -38,6 +38,6 @@ const { lang = 'de' } = Astro.props;
 <style>
 @media (max-width: 640px) {
   #ueber-uns .container > div { grid-template-columns: 1fr !important; }
-  #ueber-uns img { max-width: 260px !important; }
+  #ueber-uns img { width: 140px !important; }
 }
 </style>
