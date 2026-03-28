@@ -10,12 +10,12 @@ const { lang = 'de' } = Astro.props;
           {lang === 'de' ? '— Für Unternehmen' : '— For businesses'}
         </p>
         <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:1rem;color:#fff;">
-          {lang === 'de' ? 'Ihre Firma braucht verlässliche IT — nicht nur Einzelhilfe.' : 'Your business needs reliable IT — not just one-off fixes.'}
+          {lang === 'de' ? 'Kennen Sie jemanden, dessen Firma IT-Hilfe braucht?' : 'Know someone whose business needs IT help?'}
         </h2>
         <p style="color:#999;font-size:1rem;line-height:1.7;margin-bottom:1.75rem;">
           {lang === 'de'
-            ? 'WERIXO ist unser Managed-Service-Partner für KMU in NRW — mit Monitoring, Backups, Endpoint-Schutz und vierteljährlichen Evidence-Berichten.'
-            : 'WERIXO is our Managed Service partner for SMEs in NRW — with monitoring, backups, endpoint protection and quarterly evidence reports.'}
+            ? 'Wenn bei einem kleinen Unternehmen der PC ausfällt oder das WLAN streikt, steht oft alles still. WERIXO kümmert sich darum — persönlich, ohne Fachjargon, für faire Preise.'
+            : 'When a small business loses its internet or a PC breaks down, everything stops. WERIXO takes care of it — personally, no jargon, fair prices.'}
         </p>
         <a href="https://werixo.de" target="_blank" rel="noopener"
           style="display:inline-flex;align-items:center;gap:0.5rem;font-family:'IBM Plex Mono',monospace;font-size:0.95rem;font-weight:600;color:#fff;background:#C1440E;border:none;padding:0.85rem 2rem;border-radius:4px;text-decoration:none;transition:background 0.15s;min-height:44px;"
@@ -23,20 +23,20 @@ const { lang = 'de' } = Astro.props;
           werixo.de ↗
         </a>
         <p style="margin:0.75rem 0 0;font-size:0.8rem;color:#555;font-family:'IBM Plex Mono',monospace;">
-          {lang === 'de' ? 'Managed Service · Für KMU in NRW' : 'Managed Service · For SMEs in NRW'}
+          {lang === 'de' ? 'Für kleine Firmen in NRW · Einfach empfehlen' : 'For small businesses in NRW · Just recommend us'}
         </p>
       </div>
       <div style="display:grid;gap:1rem;">
         {(lang === 'de' ? [
-          ['📡', 'Monitoring & Alerting', '24/7 Systemüberwachung'],
-          ['💾', 'Backup & Recovery', 'Verifizierte Backups, getestet'],
-          ['🛡️', 'Endpoint-Schutz', 'GravityZone auf allen Geräten'],
-          ['📋', 'Evidence Pack', 'Vierteljährliche Berichte'],
+          ['📡', 'Wir merken, wenn etwas nicht stimmt', 'Bevor Sie es tun — und bevor es teuer wird.'],
+          ['💾', 'Ihre Daten sind sicher', 'Tägliche Backups — falls mal etwas schiefgeht.'],
+          ['🛡️', 'Kein Virus kommt durch', 'Schutz auf jedem PC und Laptop Ihres Teams.'],
+          ['📋', 'Sie wissen immer, was läuft', 'Kurzer Bericht alle 3 Monate — kein Fachjargon.'],
         ] : [
-          ['📡', 'Monitoring & Alerting', '24/7 system surveillance'],
-          ['💾', 'Backup & Recovery', 'Verified and tested backups'],
-          ['🛡️', 'Endpoint Protection', 'GravityZone on all devices'],
-          ['📋', 'Evidence Pack', 'Quarterly reports'],
+          ['📡', 'We notice when something is wrong', 'Before you do — and before it gets expensive.'],
+          ['💾', 'Your data is safe', 'Daily backups — in case something goes wrong.'],
+          ['🛡️', 'No virus gets through', 'Protection on every PC and laptop in your team.'],
+          ['📋', 'You always know what\'s going on', 'Short report every 3 months — no jargon.'],
         ]).map(([icon, title, sub]) => (
           <div style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:#1e1e1e;border-radius:4px;border:1px solid #3a3a3a;border-left:3px solid #C1440E;">
             <span style="font-size:1.25rem;flex-shrink:0;">{icon}</span>
