@@ -3,14 +3,14 @@ interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 
 const de = {
-  headline: 'Wenn es Strom hat, schauen wir es uns an.',
-  sub: 'Markenunabhängig. Erklärt in einfachem Deutsch.',
+  headline: 'Was funktioniert nicht? Wir lösen es — fast jedes Gerät.',
+  sub: 'Markenunabhängig. Wir erklären alles in verständlichem Deutsch.',
   last: 'Alles andere — einfach fragen.',
   cta: 'Jetzt anfragen →',
   services: [
     {
       id: 'pc', icon: '💻', name: 'PC & Laptop',
-      desc: 'Langsam, Absturz, Viren, Neueinrichtung',
+      desc: 'Zu langsam, friert ein, Viren, Neueinrichtung',
       price: '€29 Fernwartung · €79 Vor-Ort', time: '30–60 Min',
       steps: ['Problem genau besprechen & diagnostizieren', 'Fernwartung via TeamViewer (wenn möglich)', 'Viren entfernen, System optimieren, Updates', 'Neueinrichtung falls nötig', 'Alles testen & Schritt für Schritt erklären'],
     },
@@ -78,12 +78,12 @@ const de = {
 };
 
 const en = {
-  headline: "If it needs power, we'll take a look.",
-  sub: 'Brand independent. Explained in plain language.',
+  headline: "Not working? We fix it — almost any device.",
+  sub: 'Brand independent. We explain everything in plain language.',
   last: 'Anything else — just ask.',
   cta: 'Request now →',
   services: [
-    { id: 'pc', icon: '💻', name: 'PC & Laptop', desc: 'Slow, crashes, viruses, fresh setup', price: '€29 Remote · €79 On-site', time: '30–60 min', steps: ['Diagnose the exact problem', 'Remote support via TeamViewer (if possible)', 'Remove viruses, optimize, update', 'Fresh setup if needed', 'Test everything & explain step by step'] },
+    { id: 'pc', icon: '💻', name: 'PC & Laptop', desc: 'Too slow, freezes, viruses, fresh setup', price: '€29 Remote · €79 On-site', time: '30–60 min', steps: ['Diagnose the exact problem', 'Remote support via TeamViewer (if possible)', 'Remove viruses, optimize, update', 'Fresh setup if needed', 'Test everything & explain step by step'] },
     { id: 'handy', icon: '📱', name: 'iPhone & Android', desc: 'Setup, photo backup, apps, updates', price: '€79 On-site', time: 'Approx. 1 hour', steps: ['Discuss device & needs', 'Install & configure apps', 'Backup & transfer photos and contacts', 'Set up email & WiFi', 'Explain everything — at your pace'] },
     { id: 'wlan', icon: '📡', name: 'WiFi & Router', desc: 'No internet, weak signal, new router', price: '€29 Remote · €79 On-site', time: '30–60 min', steps: ['Check situation & find issue', 'Reconfigure router', 'Connect all devices', 'Optimize signal', 'Secure password & write it down'] },
     { id: 'tv', icon: '📺', name: 'Smart TV & Streaming', desc: 'Netflix, Prime, channels, media library', price: '€79 On-site', time: 'Approx. 1 hour', steps: ['Unbox & set up (if new)', 'Connect WiFi & install updates', 'Sort channels (up to 15 favorites)', 'Set up Netflix, Prime Video, streaming apps', 'Explain remote & features'] },
@@ -175,8 +175,8 @@ const c = lang === 'en' ? en : de;
 .svc-tile:hover { border-color: var(--terra); background: var(--terra-light); transform: translateY(-2px); }
 .svc-tile.active { border-color: var(--terra); background: var(--terra-light); }
 .svc-tile-icon { font-size: 2rem; line-height: 1; }
-.svc-tile-name { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--text); line-height: 1.3; }
-.svc-tile-price { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--terra); font-weight: 700; }
+.svc-tile-name { font-family: 'IBM Plex Sans', sans-serif; font-size: clamp(0.7rem, 2vw, 0.8rem); font-weight: 600; color: var(--text); line-height: 1.3; }
+.svc-tile-price { font-family: 'IBM Plex Mono', monospace; font-size: clamp(0.6rem, 1.8vw, 0.7rem); color: var(--terra); font-weight: 700; }
 
 .svc-detail {
   margin-top: 0.75rem;
@@ -193,6 +193,10 @@ const c = lang === 'en' ? en : de;
 @media (max-width: 767px) {
   .svc-grid, .svc-detail { display: none !important; }
   .svc-list { display: block; }
+}
+
+@media (max-width: 640px) {
+  .svc-panel { padding-left: 1.5rem; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {

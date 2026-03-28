@@ -14,18 +14,18 @@ const { lang = 'de' } = Astro.props;
     <!-- Big headline -->
     <h1 class="anim-2" style="font-size:clamp(3.5rem,10vw,7rem);line-height:1;letter-spacing:-0.03em;margin-bottom:0;color:var(--text);max-width:18ch;">
       {lang === 'de'
-        ? <Fragment>Technik&shy;probleme?<br/><em style="font-style:normal;color:var(--terra);">Wir lösen sie.</em></Fragment>
-        : <Fragment>Tech problems?<br/><em style="font-style:normal;color:var(--terra);">We fix them.</em></Fragment>
+        ? <Fragment>Läuft etwas nicht?<br/><em style="font-style:normal;color:var(--terra);">Wir kommen zu Ihnen.</em></Fragment>
+        : <Fragment>Something not working?<br/><em style="font-style:normal;color:var(--terra);">We come to you.</em></Fragment>
       }
     </h1>
 
     <!-- CTA row -->
     <div class="anim-3" style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);">
       <a href="#assistent" class="btn-primary" style="font-size:1rem;padding:0.9rem 2rem;">
-        {lang === 'de' ? 'Was kostet mein Problem? →' : 'What does my problem cost? →'}
+        {lang === 'de' ? 'In 60 Sekunden zum Preis →' : 'Get your price in 60 seconds →'}
       </a>
       <p style="font-size:0.9rem;color:var(--muted);margin:0;">
-        {lang === 'de' ? 'Kein Konzernpreis. Kein Minutentakt.' : 'No corporate price. No per-minute billing.'}
+        {lang === 'de' ? 'Feste Preise. Klare Ansage vorher.' : 'Fixed prices. Full transparency upfront.'}
       </p>
     </div>
   </div>

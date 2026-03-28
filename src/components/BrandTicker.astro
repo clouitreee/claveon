@@ -98,4 +98,11 @@ const brands = [
   @media (prefers-reduced-motion: reduce) {
     .ticker-track { animation: none; }
   }
+
+  @media (max-width: 640px) {
+    .ticker-wrap { padding: 1.5rem 0; }
+    .ticker-item svg { width: 18px; height: 18px; }
+    .ticker-item span { font-size: 0.7rem; }
+    .ticker-item { gap: 0.4rem; }
+  }
 </style>

@@ -73,7 +73,7 @@
     font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
     color: var(--text);
     background: var(--bg);
-    font-size: 20px;
+    font-size: clamp(16px, 4.5vw, 20px);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
@@ -90,12 +90,13 @@
 
 @layer components {
   .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
-  .section    { padding: 6rem 0; }
-  .section-sm { padding: 2.5rem 0; }
+  .section    { padding: clamp(3rem, 8vw, 6rem) 0; }
+  .section-sm { padding: clamp(1.5rem, 4vw, 2.5rem) 0; }
   .divider    { height: 1px; background: var(--border); }
 
   .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px;
     background: var(--terra); color: #fff;
     font-family: 'IBM Plex Mono', monospace; font-weight: 600;
     font-size: 0.95rem; padding: 0.85rem 2rem; border-radius: 4px;
@@ -106,7 +107,8 @@
   .btn-primary:active { transform: translateY(0); }
 
   .btn-ghost {
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px;
     background: transparent; color: var(--terra);
     font-family: 'IBM Plex Mono', monospace; font-weight: 600;
     font-size: 0.9rem; padding: 0.75rem 1.5rem; border-radius: 4px;
@@ -117,6 +119,7 @@
 
   .field {
     width: 100%; padding: 0.85rem 1rem;
+    min-height: 44px;
     border: 2px solid var(--border); border-radius: 4px;
     font-family: 'IBM Plex Sans', sans-serif; font-size: 1rem;
     color: var(--text); background: var(--bg);
@@ -161,10 +164,16 @@
 }
 [data-reveal].visible { opacity: 1; transform: translateY(0); }
 
+/* Tablet — breakpoint 641–1024px */
+@media (min-width: 641px) and (max-width: 1024px) {
+  body { font-size: 18px; }
+}
+
+/* Mobile — hasta 640px */
 @media (max-width: 640px) {
-  body { font-size: 17px; }
-  .section { padding: 4rem 0; }
+  body { font-size: 16px; }
+  .section { padding: 3rem 0; }
   .container { padding: 0 1.25rem; }
-  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; min-height: 48px; }
   .result-card { padding: 1.5rem; }
 }

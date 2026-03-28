@@ -18,14 +18,14 @@ const { lang = 'de' } = Astro.props;
         </h2>
         {lang === 'de' ? (
           <div style="display:grid;gap:1rem;color:var(--muted);font-size:1rem;line-height:1.7;">
-            <p style="margin:0;">Wir sind ein kleines Team aus Köln — mit Leidenschaft für Technik und dem echten Wunsch, dass Ihre Geräte funktionieren.</p>
-            <p style="margin:0;">Wir kommen persönlich zu Ihnen, erklären was wir tun, und gehen erst wenn das Problem gelöst ist.</p>
+            <p style="margin:0;">Martin repariert seit über 10 Jahren Geräte in Köln — ohne Fachjargon, ohne Callcenter. Nur echte Hilfe.</p>
+            <p style="margin:0;">Er kommt persönlich zu Ihnen, erklärt jeden Schritt verständlich — und geht erst, wenn das Problem gelöst ist.</p>
             <p style="margin:0;font-weight:600;color:var(--text);">Deutsch · Español · English</p>
           </div>
         ) : (
           <div style="display:grid;gap:1rem;color:var(--muted);font-size:1rem;line-height:1.7;">
-            <p style="margin:0;">We are a small team from Cologne — passionate about technology and genuinely wanting your devices to work.</p>
-            <p style="margin:0;">We come to you personally, explain what we do, and don't leave until the problem is solved.</p>
+            <p style="margin:0;">Martin has been fixing devices in Cologne for over 10 years — no jargon, no call centre. Just real help.</p>
+            <p style="margin:0;">He comes to you personally, explains every step clearly — and doesn't leave until the problem is solved.</p>
             <p style="margin:0;font-weight:600;color:var(--text);">Deutsch · Español · English</p>
           </div>
         )}
@@ -36,6 +36,9 @@ const { lang = 'de' } = Astro.props;
 <div class="divider"></div>
 
 <style>
+@media (min-width: 641px) and (max-width: 1024px) {
+  #ueber-uns img { width: 160px !important; }
+}
 @media (max-width: 640px) {
   #ueber-uns .container > div { grid-template-columns: 1fr !important; }
   #ueber-uns img { width: 140px !important; }

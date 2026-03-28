@@ -2,8 +2,8 @@
 interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 const items = lang === 'de'
-  ? ['Kein Konzernpreis', 'Kein Minutentakt', 'Köln & 15 km Umgebung', 'Antwort in 24h']
-  : ['No corporate pricing', 'No per-minute billing', 'Cologne & 15 km area', 'Reply within 24h'];
+  ? ['Fester Preis — keine Überraschungen', 'Ein Techniker — derselbe Mensch', 'Antwort in 24 Stunden — garantiert', 'Sie verstehen alles, was wir tun']
+  : ['Fixed price — no surprises', 'One technician — always the same person', 'Reply within 24 hours — guaranteed', 'We explain everything we do'];
 ---
 <section style="padding:1.25rem 0;background:var(--bg-soft);border-bottom:1px solid var(--border);">
   <div class="container">

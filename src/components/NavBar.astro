@@ -5,16 +5,16 @@ const otherHref = lang === 'de' ? '/en/' : '/';
 const otherFlag = lang === 'de' ? '🇬🇧' : '🇩🇪';
 const otherLabel = lang === 'de' ? 'EN' : 'DE';
 ---
-<nav class="fixed top-0 left-0 right-0 z-50" style="background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);">
+<nav class="fixed top-0 left-0 right-0 z-50 navbar" style="background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);">
   <div class="container">
-    <div class="flex h-16 items-center justify-between">
+    <div class="flex navbar-inner items-center justify-between">
       <a href={lang === 'de' ? '/' : '/en/'} style="text-decoration:none;display:flex;align-items:baseline;">
-        <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.25rem;color:var(--text);letter-spacing:-0.04em;">Clave</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.25rem;color:var(--terra);letter-spacing:-0.04em;">ON</span>
+        <span class="navbar-logo-text" style="color:var(--text);">Clave</span><span class="navbar-logo-text" style="color:var(--terra);">ON</span>
       </a>
-      <div class="flex items-center gap-5">
-        <a href={otherHref} style="font-family:'IBM Plex Mono',monospace;font-size:0.9rem;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:0.35rem;">{otherFlag} {otherLabel}</a>
-        <span style="width:1px;height:1rem;background:var(--border);display:inline-block;"></span>
-        <a href="https://werixo.de" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;font-weight:600;color:var(--terra);text-decoration:none;white-space:nowrap;">
+      <div class="flex navbar-right items-center">
+        <a href={otherHref} class="navbar-lang" style="color:var(--text);text-decoration:none;display:flex;align-items:center;gap:0.35rem;">{otherFlag} {otherLabel}</a>
+        <span class="navbar-divider" style="width:1px;height:1rem;background:var(--border);display:inline-block;"></span>
+        <a href="https://werixo.de" target="_blank" rel="noopener" class="navbar-werixo-badge">
           {lang === 'de' ? 'Für Unternehmen ↗' : 'For businesses ↗'}
         </a>
       </div>
@@ -22,3 +22,42 @@ const otherLabel = lang === 'de' ? 'EN' : 'DE';
   </div>
 </nav>
 <div style="height:4rem;"></div>
+
+<style>
+.navbar-inner { height: 4rem; }
+.navbar-logo-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+}
+.navbar-right { gap: 1.25rem; }
+.navbar-lang {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.navbar-werixo-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--terra);
+  text-decoration: none;
+  white-space: nowrap;
+  background: var(--terra-light);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid rgba(193, 68, 14, 0.2);
+  transition: background 0.15s;
+}
+.navbar-werixo-badge:hover { background: #f5d9cd; }
+
+@media (max-width: 375px) {
+  .navbar-inner { height: 3.5rem; }
+  .navbar-logo-text { font-size: 1rem; }
+  .navbar-lang { font-size: 0.75rem; }
+  .navbar-werixo-badge { font-size: 0.7rem; padding: 0.3rem 0.5rem; }
+  .navbar-right { gap: 0.6rem; }
+  .navbar-divider { display: none; }
+}
+</style>

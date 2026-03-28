@@ -3,8 +3,8 @@ interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 
 const de = {
-  headline: 'Was ist Ihr Problem?',
-  sub: 'Wählen Sie aus — wir zeigen Ihnen den genauen Preis und die Zeit.',
+  headline: 'Was funktioniert nicht?',
+  sub: 'Wählen Sie aus — Sie sehen sofort den genauen Preis.',
   step1: { q: 'Für wen?', opts: [
     { id: 'privat', icon: '🏠', label: 'Für mich / Familie' },
     { id: 'firma',  icon: '🏢', label: 'Für mein Unternehmen' },
@@ -17,11 +17,11 @@ const de = {
     { id: 'other', icon: '🔧', label: 'Sonstiges' },
   ]},
   step3: {
-    pc:    { q: 'Was ist das Problem?', opts: [{ id: 'slow', label: 'Läuft langsam / Abstürze' }, { id: 'virus', label: 'Viren / Fehlermeldungen' }, { id: 'setup', label: 'Neueinrichtung / Windows 11' }]},
-    handy: { q: 'Was ist das Problem?', opts: [{ id: 'setup', label: 'Einrichtung / Apps' }, { id: 'photos', label: 'Fotos sichern / übertragen' }, { id: 'slow', label: 'Langsam / Speicher voll' }]},
-    wlan:  { q: 'Was ist das Problem?', opts: [{ id: 'none', label: 'Kein Internet' }, { id: 'weak', label: 'Schwaches Signal' }, { id: 'new', label: 'Neuer Router einrichten' }]},
-    tv:    { q: 'Was ist das Problem?', opts: [{ id: 'stream', label: 'Netflix / Streaming einrichten' }, { id: 'print', label: 'Drucker funktioniert nicht' }, { id: 'other', label: 'Sonstiges' }]},
-    other: { q: 'Was brauchen Sie?', opts: [{ id: 'remote', label: 'Fernhilfe reicht' }, { id: 'onsite', label: 'Jemand soll vorbeikommen' }, { id: 'unsure', label: 'Ich bin nicht sicher' }]},
+    pc:    { q: 'Was genau passiert?', opts: [{ id: 'slow', label: 'Zu langsam, friert ein, stürzt ab' }, { id: 'virus', label: 'Pop-ups, Meldungen, Browser verändert' }, { id: 'setup', label: 'Neues Gerät — bitte einrichten & erklären' }]},
+    handy: { q: 'Was genau passiert?', opts: [{ id: 'setup', label: 'Neues Handy einrichten, Apps übertragen' }, { id: 'photos', label: 'Fotos sichern oder auf neues Gerät' }, { id: 'slow', label: 'Langsam, Speicher voll, friert ein' }]},
+    wlan:  { q: 'Was genau passiert?', opts: [{ id: 'none', label: 'Kein Internet mehr' }, { id: 'weak', label: 'Signal schwach, ständig weg' }, { id: 'new', label: 'Neuen Router einrichten' }]},
+    tv:    { q: 'Was genau passiert?', opts: [{ id: 'stream', label: 'Netflix / Streaming läuft nicht' }, { id: 'print', label: 'Drucker druckt nicht / wird nicht erkannt' }, { id: 'other', label: 'Etwas anderes' }]},
+    other: { q: 'Was brauchen Sie?', opts: [{ id: 'remote', label: 'Fernhilfe reicht mir' }, { id: 'onsite', label: 'Bitte zu mir kommen' }, { id: 'unsure', label: 'Ich bin nicht sicher' }]},
   },
   results: {
     remote:    { pkg: 'Fernwartung', price: '€29', unit: '/ 30 Min', how: 'Per Bildschirmübertragung — wir verbinden uns mit Ihrem Gerät.', time: '30 Minuten', note: 'Brauchen wir länger? Wir sagen es vorher — nie mehr ohne Ihre Zustimmung.', tv_link: true },
@@ -38,16 +38,16 @@ const de = {
   fallback: 'Stundensatz: €59/h — transparent, kein Minutentakt.',
 };
 const en = {
-  headline: "What's your problem?",
-  sub: 'Select below — we show you the exact price and time.',
+  headline: "What isn't working?",
+  sub: 'Select below — you see the exact price right away.',
   step1: { q: 'Who is this for?', opts: [{ id: 'privat', icon: '🏠', label: 'For me / family' }, { id: 'firma', icon: '🏢', label: 'For my business' }]},
   step2: { q: 'Which device?', opts: [{ id: 'pc', icon: '💻', label: 'PC / Laptop' }, { id: 'handy', icon: '📱', label: 'Phone / Tablet' }, { id: 'wlan', icon: '📡', label: 'WiFi / Router' }, { id: 'tv', icon: '📺', label: 'TV / Printer' }, { id: 'other', icon: '🔧', label: 'Other' }]},
   step3: {
-    pc:    { q: "What's the issue?", opts: [{ id: 'slow', label: 'Running slow / crashes' }, { id: 'virus', label: 'Viruses / error messages' }, { id: 'setup', label: 'Fresh setup / Windows 11' }]},
-    handy: { q: "What's the issue?", opts: [{ id: 'setup', label: 'Setup / apps' }, { id: 'photos', label: 'Backup / transfer photos' }, { id: 'slow', label: 'Slow / storage full' }]},
-    wlan:  { q: "What's the issue?", opts: [{ id: 'none', label: 'No internet' }, { id: 'weak', label: 'Weak signal' }, { id: 'new', label: 'New router setup' }]},
-    tv:    { q: "What's the issue?", opts: [{ id: 'stream', label: 'Netflix / streaming setup' }, { id: 'print', label: "Printer not working" }, { id: 'other', label: 'Other' }]},
-    other: { q: 'What do you need?', opts: [{ id: 'remote', label: 'Remote help is enough' }, { id: 'onsite', label: 'Someone should come over' }, { id: 'unsure', label: "I'm not sure" }]},
+    pc:    { q: 'What exactly happens?', opts: [{ id: 'slow', label: 'Too slow, freezes, crashes' }, { id: 'virus', label: 'Pop-ups, weird messages, browser changed' }, { id: 'setup', label: 'New device — please set up & explain' }]},
+    handy: { q: 'What exactly happens?', opts: [{ id: 'setup', label: 'Set up new phone, transfer apps' }, { id: 'photos', label: 'Back up or move photos to new device' }, { id: 'slow', label: 'Slow, storage full, keeps freezing' }]},
+    wlan:  { q: 'What exactly happens?', opts: [{ id: 'none', label: 'No internet at all' }, { id: 'weak', label: 'Signal weak, keeps dropping' }, { id: 'new', label: 'Set up new router' }]},
+    tv:    { q: 'What exactly happens?', opts: [{ id: 'stream', label: "Netflix / streaming doesn't work" }, { id: 'print', label: "Printer won't print / not recognized" }, { id: 'other', label: 'Something else' }]},
+    other: { q: 'What do you need?', opts: [{ id: 'remote', label: 'Remote help is enough' }, { id: 'onsite', label: 'Please come to me' }, { id: 'unsure', label: "I'm not sure" }]},
   },
   results: {
     remote:    { pkg: 'Remote Support', price: '€29', unit: '/ 30 min', how: 'Via screen sharing — we connect to your device.', time: '30 minutes', note: 'Need more time? We tell you first — never more without your approval.', tv_link: true },
@@ -65,6 +65,17 @@ const en = {
 };
 const c = lang === 'en' ? en : de;
 ---
+
+<style>
+@media (max-width: 480px) {
+  #step-1 > div,
+  #step-2 > div,
+  #step3-opts { grid-template-columns: repeat(2, 1fr) !important; gap: 0.5rem !important; }
+}
+.result-card {
+  max-width: 580px;
+}
+</style>
 
 <section class="section" id="assistent" data-reveal style="background:var(--bg-soft);">
   <div class="container">

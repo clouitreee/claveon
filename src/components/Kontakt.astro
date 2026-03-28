@@ -3,15 +3,15 @@ interface Props { lang?: string; }
 const { lang = 'de' } = Astro.props;
 const t = {
   de: {
-    headline: 'Schreiben Sie uns.',
-    sub: 'Antwort innerhalb von 24 Stunden.',
+    headline: 'Schreiben Sie kurz, was los ist.',
+    sub: 'Martin meldet sich innerhalb von 24 Stunden.',
     typePrivat: 'Privat',
     typeUnternehmen: 'Unternehmen',
     werixoText: 'Für IT-Infrastruktur von Unternehmen empfehlen wir WERIXO — professioneller Managed Service mit Monitoring, Backups und vierteljährlichem Evidence Pack.',
     werixoCta: 'werixo.de besuchen ↗',
     nameLabel: 'Ihr Name', emailLabel: 'E-Mail-Adresse',
     phoneLabel: 'Telefon (optional)', phonePlaceholder: '+49 ...',
-    paketLabel: 'Paket (optional)',
+    paketLabel: 'Worum geht es? (optional)',
     paketOptions: [
       { value: '', label: '— kein bestimmtes —' },
       { value: 'remote', label: 'Fernwartung · €29 / 30 Min' },
@@ -20,7 +20,7 @@ const t = {
       { value: 'migration', label: 'Windows 10 → 11 · €99' },
       { value: 'other', label: 'Sonstiges · €59/h' },
     ],
-    msgLabel: 'Ihre Nachricht', msgPlaceholder: 'Was funktioniert nicht? Eine kurze Beschreibung reicht.',
+    msgLabel: 'Ihre Nachricht', msgPlaceholder: 'z.B.: Seit gestern startet mein PC sehr langsam und friert manchmal ein.',
     submit: 'Nachricht senden', sending: 'Wird gesendet…',
     success: '✓ Nachricht gesendet. Wir melden uns bald.',
     error: 'Fehler beim Senden. Bitte direkt an info@claveon.de schreiben.',
@@ -30,15 +30,15 @@ const t = {
     datenschutzHref: '/datenschutz/',
   },
   en: {
-    headline: 'Write to us.',
-    sub: 'Reply within 24 hours.',
+    headline: "Tell us what isn't working.",
+    sub: 'Martin replies within 24 hours.',
     typePrivat: 'Personal',
     typeUnternehmen: 'Business',
     werixoText: 'For business IT infrastructure we recommend WERIXO — professional Managed Service with monitoring, backups and quarterly Evidence Pack.',
     werixoCta: 'Visit werixo.de ↗',
     nameLabel: 'Your name', emailLabel: 'Email address',
     phoneLabel: 'Phone (optional)', phonePlaceholder: '+49 ...',
-    paketLabel: 'Package (optional)',
+    paketLabel: 'What is it about? (optional)',
     paketOptions: [
       { value: '', label: '— no specific package —' },
       { value: 'remote', label: 'Remote Support · €29 / 30 min' },
@@ -47,7 +47,7 @@ const t = {
       { value: 'migration', label: 'Windows 10 → 11 · €99' },
       { value: 'other', label: 'Other · €59/h' },
     ],
-    msgLabel: 'Your message', msgPlaceholder: "What's not working? A short description is enough.",
+    msgLabel: 'Your message', msgPlaceholder: 'e.g.: My PC has been very slow since yesterday and sometimes freezes.',
     submit: 'Send message', sending: 'Sending…',
     success: "✓ Message sent. We'll get back to you soon.",
     error: 'Error sending. Please write directly to info@claveon.de.',
@@ -61,7 +61,7 @@ const c = t[lang as keyof typeof t] ?? t.de;
 ---
 <section class="section" id="kontakt" data-reveal>
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start;">
       <div>
         <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:1rem;">
           {lang === 'de' ? '— Kontakt' : '— Contact'}
@@ -89,7 +89,7 @@ const c = t[lang as keyof typeof t] ?? t.de;
             <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.nameLabel} *</label>
             <input name="name" required type="text" class="field" placeholder="Anna Müller" />
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-row-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <div>
               <label style="display:block;font-size:0.875rem;font-weight:600;margin-bottom:0.4rem;">{c.emailLabel} *</label>
               <input name="email" required type="email" class="field" placeholder="ihre@email.de" />
@@ -111,7 +111,7 @@ const c = t[lang as keyof typeof t] ?? t.de;
           </div>
           <div>
             <label style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--muted);cursor:pointer;line-height:1.4;">
-              <input name="consent" type="checkbox" required style="margin-top:0.2rem;accent-color:var(--terra);flex-shrink:0;" />
+              <input name="consent" type="checkbox" required style="width:20px;height:20px;min-width:20px;margin-top:0.15rem;accent-color:var(--terra);flex-shrink:0;cursor:pointer;" />
               <span>
                 {c.consentLabel}&nbsp;<a href={c.datenschutzHref} target="_blank" rel="noopener" style="color:var(--terra);text-decoration:underline;">{c.consentLink}</a>&nbsp;{c.consentSuffix}
               </span>
@@ -127,8 +127,8 @@ const c = t[lang as keyof typeof t] ?? t.de;
 
 <style>
 @media (max-width: 640px) {
-  #kontakt .container > div { grid-template-columns: 1fr !important; }
-  #contact-form > div:nth-child(2) { grid-template-columns: 1fr !important; }
+  #kontakt .container > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  #contact-form .form-row-2col { grid-template-columns: 1fr !important; }
 }
 </style>
 
