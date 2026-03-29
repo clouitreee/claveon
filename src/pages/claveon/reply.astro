@@ -1,0 +1,190 @@
+---
+// Reply panel — internal use only, password protected
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClaveON · Antworten</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f4;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 600px;
+      overflow: hidden;
+    }
+    .header {
+      background: #C1440E;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header span { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+    .header small { font-size: 13px; color: rgba(255,255,255,0.75); }
+    .body { padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+    .info-box {
+      background: #f9fafb;
+      border-left: 3px solid #C1440E;
+      border-radius: 0 6px 6px 0;
+      padding: 14px 16px;
+    }
+    .info-box .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #9ca3af; margin-bottom: 4px; }
+    .info-box .value { font-size: 14px; color: #1f2937; line-height: 1.5; white-space: pre-wrap; }
+    label { font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 6px; }
+    input, textarea {
+      width: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #1f2937;
+      outline: none;
+      transition: border-color .15s;
+    }
+    input:focus, textarea:focus { border-color: #C1440E; }
+    textarea { resize: vertical; min-height: 180px; line-height: 1.6; }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+    button {
+      background: #C1440E;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background .15s;
+    }
+    button:hover { background: #8B2E06; }
+    button:disabled { background: #d1d5db; cursor: not-allowed; }
+    .msg { font-size: 14px; padding: 10px 14px; border-radius: 6px; display: none; }
+    .msg.ok  { background: #dcfce7; color: #166534; display: block; }
+    .msg.err { background: #fee2e2; color: #991b1b; display: block; }
+    .divider { border: none; border-top: 1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <span>ClaveON</span>
+      <small>Antwort senden</small>
+    </div>
+    <div class="body">
+      <div id="client-info" style="display:none">
+        <div class="info-box">
+          <div class="label">Empfänger</div>
+          <div class="value" id="display-name"></div>
+        </div>
+      </div>
+
+      <div id="orig-msg-box" style="display:none">
+        <div class="info-box">
+          <div class="label">Ursprüngliche Nachricht</div>
+          <div class="value" id="display-msg"></div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div>
+        <label for="subject">Betreff</label>
+        <input id="subject" type="text" placeholder="Re: Ihre Anfrage bei ClaveON" />
+      </div>
+
+      <div>
+        <label for="message">Antwort</label>
+        <textarea id="message" placeholder="Guten Tag …"></textarea>
+      </div>
+
+      <hr class="divider" />
+
+      <div>
+        <label for="password">Passwort</label>
+        <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+
+      <div id="status" class="msg"></div>
+
+      <button id="send-btn" type="button">Antwort senden →</button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const to      = params.get('to')      || '';
+    const name    = params.get('name')    || '';
+    const subject = params.get('subject') || '';
+    const msg     = params.get('msg')     || '';
+
+    if (name) {
+      document.getElementById('display-name').textContent = name;
+      document.getElementById('client-info').style.display = 'block';
+    }
+    if (msg) {
+      document.getElementById('display-msg').textContent = msg;
+      document.getElementById('orig-msg-box').style.display = 'block';
+    }
+    if (subject) {
+      document.getElementById('subject').value = subject;
+    }
+
+    document.getElementById('send-btn').addEventListener('click', async () => {
+      const btn     = document.getElementById('send-btn');
+      const status  = document.getElementById('status');
+      const message = document.getElementById('message').value.trim();
+      const password = document.getElementById('password').value;
+      const subjectVal = document.getElementById('subject').value.trim() || 'Re: Ihre Anfrage bei ClaveON';
+
+      status.className = 'msg';
+      status.textContent = '';
+
+      if (!message) { status.className = 'msg err'; status.textContent = 'Bitte eine Nachricht eingeben.'; return; }
+      if (!password) { status.className = 'msg err'; status.textContent = 'Bitte Passwort eingeben.'; return; }
+      if (!to) { status.className = 'msg err'; status.textContent = 'Kein Empfänger — URL ungültig.'; return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Wird gesendet…';
+
+      try {
+        const res = await fetch('/claveon/reply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password, to, name, subject: subjectVal, message }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          status.className = 'msg ok';
+          status.textContent = `✓ Antwort an ${name} gesendet.`;
+          document.getElementById('message').value = '';
+          btn.textContent = 'Gesendet ✓';
+        } else {
+          throw new Error(data.error || 'Fehler');
+        }
+      } catch (e) {
+        status.className = 'msg err';
+        status.textContent = e.message;
+        btn.disabled = false;
+        btn.textContent = 'Antwort senden →';
+      }
+    });
+  </script>
+</body>
+</html>
