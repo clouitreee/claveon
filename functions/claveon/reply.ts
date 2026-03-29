@@ -31,8 +31,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     <tr><td align="center">
       <table width="100%" style="max-width:560px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
         <tr>
-          <td style="background:#111827;padding:24px 32px;">
-            <span style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:20px;font-weight:700;letter-spacing:-0.5px;"><span style="color:#ffffff;">Clave</span><span style="color:#C1440E;">ON</span></span>
+          <td style="background:#C1440E;padding:24px 32px;">
+            <span style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:20px;font-weight:700;letter-spacing:-0.5px;"><span style="color:#ffffff;">Clave</span><span style="color:#fde8df;">ON</span></span>
             <span style="font-size:13px;color:rgba(255,255,255,0.75);margin-left:12px;">Ihre Anfrage</span>
           </td>
         </tr>
