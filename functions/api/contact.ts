@@ -217,7 +217,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       'accept': 'application/json',
     },
     body: JSON.stringify({
-      sender: { name: 'ClaveON', email: 'info@claveon.de' },
+      sender: { name: 'ClaveON', email: 'noreply@claveon.de' },
       to: [{ email: safeEmail, name: safeName }],
       replyTo: { email: 'info@claveon.de', name: 'ClaveON' },
       subject: `Ihre Anfrage bei ClaveON — wir melden uns bald`,
