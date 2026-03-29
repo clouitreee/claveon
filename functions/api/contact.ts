@@ -36,8 +36,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   const phoneLine = safePhone ? `\nTelefon: ${safePhone}` : '';
   const paketLine = paket     ? `\nPaket: ${paket}`       : '';
-
-  const textBody = `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`;
+  const textBody  = `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`;
 
   const paketLabel: Record<string, string> = {
     remote: 'Fernwartung · €29 / 30 Min',
@@ -47,19 +46,20 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     other: 'Sonstiges · €59/h',
   };
 
-  const paketRow = paket ? `
-    <tr>
-      <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;vertical-align:top;">Paket</td>
-      <td style="padding:8px 0;font-size:14px;font-weight:600;color:#C1440E;">${paketLabel[paket] ?? paket}</td>
-    </tr>` : '';
-
   const phoneRow = safePhone ? `
     <tr>
       <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;">Telefon</td>
       <td style="padding:8px 0;font-size:14px;">${safePhone}</td>
     </tr>` : '';
 
-  const htmlBody = `<!DOCTYPE html>
+  const paketRow = paket ? `
+    <tr>
+      <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;vertical-align:top;">Paket</td>
+      <td style="padding:8px 0;font-size:14px;font-weight:600;color:#C1440E;">${paketLabel[paket] ?? paket}</td>
+    </tr>` : '';
+
+  // Notification to Carlos
+  const notifyHtml = `<!DOCTYPE html>
 <html lang="de">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap');</style></head>
 <body style="margin:0;padding:0;background:#f5f5f4;font-family:'Helvetica Neue',Arial,sans-serif;">
@@ -89,12 +89,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
               <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Nachricht</p>
               <p style="margin:0;font-size:15px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
-            <div style="margin-top:28px;text-align:center;">
-              <a href="https://claveon.de/claveon/reply?to=${encodeURIComponent(safeEmail)}&name=${encodeURIComponent(safeName)}&subject=${encodeURIComponent('Re: Ihre Anfrage bei ClaveON')}&msg=${encodeURIComponent(safeMessage)}"
-                 style="display:inline-block;background:#C1440E;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:15px;font-weight:600;">
-                Antworten an ${safeName}
-              </a>
-            </div>
           </td>
         </tr>
         <tr>
@@ -120,7 +114,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       to: [{ email: env.NOTIFICATION_EMAIL, name: 'ClaveON' }],
       replyTo: { email: safeEmail, name: safeName },
       subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
-      htmlContent: htmlBody,
+      htmlContent: notifyHtml,
       textContent: textBody,
     }),
   });
@@ -146,7 +140,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           <td style="padding:32px;">
             <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:#111827;">Vielen Dank, ${safeName}!</p>
             <p style="margin:0 0 24px;font-size:15px;color:#4b5563;line-height:1.6;">Wir haben Ihre Anfrage erhalten und melden uns <strong>innerhalb von 24 Stunden</strong> bei Ihnen.</p>
-            <div style="padding:20px;background:#f9fafb;border-left:3px solid #C1440E;border-radius:0 6px 6px 0;margin-bottom:28px;">
+            <div style="padding:20px;background:#f9fafb;border-left:3px solid #C1440E;border-radius:0 6px 6px 0;">
               <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Ihre Nachricht</p>
               <p style="margin:0;font-size:14px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
