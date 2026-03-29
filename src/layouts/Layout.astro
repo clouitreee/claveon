@@ -92,7 +92,7 @@ const canonical = `https://claveon.de${canonicalPath}`;
           (entries) => entries.forEach(e => {
             if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
           }),
-          { threshold: 0.08 }
+          { threshold: 0, rootMargin: '0px 0px -60px 0px' }
         );
         document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
