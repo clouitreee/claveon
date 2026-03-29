@@ -174,5 +174,58 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   if (!res.ok)
     return new Response(JSON.stringify({ error: 'Sendefehler' }), { status: 500, headers });
 
+  // Auto-confirmation to client
+  const confirmHtml = `<!DOCTYPE html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f5f4;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:560px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+        <tr>
+          <td style="background:#C1440E;padding:24px 32px;">
+            <span style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">ClaveON</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.75);margin-left:12px;">Ihre Anfrage</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:32px;">
+            <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:#111827;">Vielen Dank, ${safeName}!</p>
+            <p style="margin:0 0 24px;font-size:15px;color:#4b5563;line-height:1.6;">Wir haben Ihre Anfrage erhalten und melden uns <strong>innerhalb von 24 Stunden</strong> bei Ihnen.</p>
+            <div style="padding:20px;background:#f9fafb;border-left:3px solid #C1440E;border-radius:0 6px 6px 0;margin-bottom:28px;">
+              <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Ihre Nachricht</p>
+              <p style="margin:0;font-size:14px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            </div>
+            <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.6;">Bei dringenden Fragen erreichen Sie uns direkt unter <a href="mailto:info@claveon.de" style="color:#C1440E;text-decoration:none;">info@claveon.de</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 32px;background:#f9fafb;border-top:1px solid #e5e7eb;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">claveon.de · Technische Hilfe in Köln</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'api-key': env.BREVO_API_KEY,
+      'Content-Type': 'application/json',
+      'accept': 'application/json',
+    },
+    body: JSON.stringify({
+      sender: { name: 'ClaveON', email: 'info@claveon.de' },
+      to: [{ email: safeEmail, name: safeName }],
+      replyTo: { email: 'info@claveon.de', name: 'ClaveON' },
+      subject: `Ihre Anfrage bei ClaveON — wir melden uns bald`,
+      htmlContent: confirmHtml,
+      textContent: `Vielen Dank, ${safeName}!\n\nWir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.\n\nIhre Nachricht:\n${safeMessage}\n\n--\nclaveon.de · info@claveon.de`,
+    }),
+  });
+
   return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
 };
