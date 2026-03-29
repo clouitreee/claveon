@@ -136,7 +136,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
               <p style="margin:0;font-size:15px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
             <div style="margin-top:28px;text-align:center;">
-              <a href="https://claveon.de/claveon/reply?to=${encodeURIComponent(replyEmail)}&name=${encodeURIComponent(safeName)}&subject=${encodeURIComponent('Re: Ihre Anfrage bei ClaveON')}&msg=${encodeURIComponent(safeMessage)}"
+              <a href="https://claveon.de/claveon/reply?to=${encodeURIComponent(safeEmail)}&name=${encodeURIComponent(safeName)}&subject=${encodeURIComponent('Re: Ihre Anfrage bei ClaveON')}&msg=${encodeURIComponent(safeMessage)}"
                  style="display:inline-block;background:#C1440E;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:15px;font-weight:600;">
                 Antworten an ${safeName}
               </a>
