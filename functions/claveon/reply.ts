@@ -25,14 +25,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   const htmlBody = `<!DOCTYPE html>
 <html lang="de">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap');</style></head>
 <body style="margin:0;padding:0;background:#f5f5f4;font-family:'Helvetica Neue',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:32px 16px;">
     <tr><td align="center">
       <table width="100%" style="max-width:560px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
         <tr>
           <td style="background:#C1440E;padding:24px 32px;">
-            <span style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;letter-spacing:-0.5px;"><span style="color:#ffffff;">Clave</span><span style="color:#fde8df;">ON</span></span>
+            <span style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:20px;font-weight:700;letter-spacing:-0.5px;"><span style="color:#ffffff;">Clave</span><span style="color:#fde8df;">ON</span></span>
             <span style="font-size:13px;color:rgba(255,255,255,0.75);margin-left:12px;">Ihre Anfrage</span>
           </td>
         </tr>
