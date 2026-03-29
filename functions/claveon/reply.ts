@@ -32,7 +32,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       <table width="100%" style="max-width:560px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
         <tr>
           <td style="background:#C1440E;padding:24px 32px;">
-            <span style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">ClaveON</span>
+            <span style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">Clave</span><span style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:#fde8df;letter-spacing:-0.5px;">ON</span>
             <span style="font-size:13px;color:rgba(255,255,255,0.75);margin-left:12px;">Ihre Anfrage</span>
           </td>
         </tr>
