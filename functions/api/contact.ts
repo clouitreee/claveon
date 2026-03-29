@@ -1,4 +1,4 @@
-interface Env { BREVO_API_KEY: string; SIMPLELOGIN_API_KEY?: string; }
+interface Env { BREVO_API_KEY: string; SIMPLELOGIN_API_KEY?: string; NOTIFICATION_EMAIL: string; }
 
 type SLAlias = { id: number; email: string };
 type SLContact = { reverse_alias_address?: string };
@@ -163,7 +163,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     },
     body: JSON.stringify({
       sender: { name: 'Kontaktformular claveon.de', email: 'noreply@claveon.de' },
-      to: [{ email: 'info@claveon.de', name: 'ClaveON' }],
+      to: [{ email: env.NOTIFICATION_EMAIL, name: 'ClaveON' }],
       replyTo: { email: replyEmail, name: safeName },
       subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
       htmlContent: htmlBody,
