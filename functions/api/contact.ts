@@ -1,43 +1,4 @@
-interface Env { BREVO_API_KEY: string; SIMPLELOGIN_API_KEY?: string; NOTIFICATION_EMAIL: string; }
-
-type SLAlias = { id: number; email: string };
-type SLContact = { reverse_alias_address?: string };
-
-async function getSimpleLoginReverseAlias(
-  apiKey: string,
-  clientName: string,
-  clientEmail: string
-): Promise<string | null> {
-  try {
-    const aliasRes = await fetch(
-      'https://app.simplelogin.io/api/v2/aliases?page_id=0&query=info%40claveon.de',
-      { headers: { 'Authentication': apiKey } }
-    );
-    if (!aliasRes.ok) return null;
-
-    const { aliases } = await aliasRes.json() as { aliases: SLAlias[] };
-    const alias = aliases.find(a => a.email === 'info@claveon.de');
-    if (!alias) return null;
-
-    const contactRes = await fetch(
-      `https://app.simplelogin.io/api/aliases/${alias.id}/contacts`,
-      {
-        method: 'POST',
-        headers: {
-          'Authentication': apiKey,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ contact: `${clientName} <${clientEmail}>` }),
-      }
-    );
-    if (!contactRes.ok) return null;
-
-    const contact = await contactRes.json() as SLContact;
-    return contact.reverse_alias_address ?? null;
-  } catch {
-    return null;
-  }
-}
+interface Env { BREVO_API_KEY: string; NOTIFICATION_EMAIL: string; }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
@@ -75,13 +36,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   const phoneLine = safePhone ? `\nTelefon: ${safePhone}` : '';
   const paketLine = paket     ? `\nPaket: ${paket}`       : '';
-
-  // Get SimpleLogin reverse alias so replies go FROM info@claveon.de
-  const reverseAlias = env.SIMPLELOGIN_API_KEY
-    ? await getSimpleLoginReverseAlias(env.SIMPLELOGIN_API_KEY, safeName, safeEmail)
-    : null;
-
-  const replyEmail = reverseAlias ?? safeEmail;
 
   const textBody = `Name: ${safeName}\nE-Mail: ${safeEmail}${phoneLine}${paketLine}\n\nNachricht:\n${safeMessage}`;
 
@@ -164,7 +118,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     body: JSON.stringify({
       sender: { name: 'Kontaktformular claveon.de', email: 'noreply@claveon.de' },
       to: [{ email: env.NOTIFICATION_EMAIL, name: 'ClaveON' }],
-      replyTo: { email: replyEmail, name: safeName },
+      replyTo: { email: safeEmail, name: safeName },
       subject: `Neue Anfrage von ${safeName}${paket ? ` – ${paket}` : ''}`,
       htmlContent: htmlBody,
       textContent: textBody,
