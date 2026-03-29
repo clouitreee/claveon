@@ -196,7 +196,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
               <p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Ihre Nachricht</p>
               <p style="margin:0;font-size:14px;color:#1f2937;white-space:pre-wrap;line-height:1.6;">${safeMessage.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
-            <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.6;">Bei dringenden Fragen erreichen Sie uns direkt unter <a href="mailto:info@claveon.de" style="color:#C1440E;text-decoration:none;">info@claveon.de</a></p>
           </td>
         </tr>
         <tr>
