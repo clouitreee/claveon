@@ -1,4 +1,4 @@
-interface Env { BREVO_API_KEY: string; REPLY_PASSWORD: string; }
+interface Env { BREVO_API_KEY: string; REPLY_PASSWORD: string; NOTIFICATION_EMAIL: string; }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
@@ -66,6 +66,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     body: JSON.stringify({
       sender: { name: 'ClaveON', email: 'noreply@claveon.de' },
       to: [{ email: to, name: safeName }],
+      bcc: [{ email: env.NOTIFICATION_EMAIL }],
       replyTo: { email: 'info@claveon.de', name: 'ClaveON' },
       subject: safeSubject,
       htmlContent: htmlBody,
